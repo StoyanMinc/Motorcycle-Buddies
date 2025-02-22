@@ -1,0 +1,23 @@
+.motorcycles-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 50px;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: #d3d3d3;
+}
+.motorcycles-container h1 {
+    margin-bottom: 100px;
+}
+
+.cards-wrapper {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr); /* Create 4 columns */
+    gap: 20px; /* Space between the cards */
+    overflow-y: auto; /* Enable vertical scrolling */
+    max-height: 600px; /* Set max height to allow scrolling */
+    scroll-behavior: smooth; /* Smooth scrolling */
+  }
