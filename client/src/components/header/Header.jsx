@@ -15,7 +15,7 @@ export default function Header() {
                         {user
                             ? <>
                                 <li><Link to={'/motorcycles/post'} >Add Motorcycle</Link></li>
-                                <li><Link to={'/profile'} >My Motorcycles</Link></li>
+                                <li><Link to={'/profile'} >Profile</Link></li>
                                 <li><Link to={'/logout'} >Logout</Link></li>
                             </>
                             : <>

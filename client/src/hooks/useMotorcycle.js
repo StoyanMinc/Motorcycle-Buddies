@@ -3,12 +3,13 @@ import { motorcyclesService } from "../api/motorcycles-api.js"
 import { getUser } from '../context/AuthContext.jsx';
 import { useState, useEffect } from 'react';
 
-export function useCreate() {
+export function useCreateMotorcycle() {
     const { user } = getUser();
     const navigate = useNavigate();
     const createHandler = async (values) => {
-        values.user = user.username
+        values.owner = user.userId
         const result = await motorcyclesService.create(values);
+        console.log(result)
         navigate('/');
     };
     return createHandler;
