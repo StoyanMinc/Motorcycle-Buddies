@@ -1,8 +1,6 @@
 import { useForm } from 'react-hook-form';
 import { useCreateMotorcycle } from '../../hooks/useMotorcycle.js';
 
-
-
 export default function AddMotorcycle() {
 
     const { register, handleSubmit } = useForm({

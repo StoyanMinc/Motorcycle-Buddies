@@ -10,6 +10,7 @@ import Profile from "./components/profile/Profile"
 import Login from "./components/login/Login"
 import Register from "./components/register/Register"
 import Logout from "./components/logout/Logout"
+import MotorcycleDetails from "./components/motorcycle-details/MotorcycleDetails"
 
 function App() {
 
@@ -28,7 +29,7 @@ function App() {
                         <Route path="/login" element={<Login />} />
                         <Route path="/register" element={<Register />} />
                         <Route path="/logout" element={<Logout />} />
-
+                        <Route path="/motorcycles/:motorcycleId" element={<MotorcycleDetails />} />
                     </Routes>
                 </main>
 

@@ -41,7 +41,7 @@
     padding: 10px;
 }
 
-.view-details-btn {
+.view-details-btn, .edit-btn, .delete-btn {
     margin-top: 10px;
     background-color: #007BFF; /* Blue background */
     color: white; /* White text */
@@ -55,16 +55,16 @@
     text-transform: uppercase; /* Uppercase text */
 }
 
-.view-details-btn:hover {
+.view-details-btn:hover ,.edit-btn:hover, .delete-btn:hover  {
     background-color: #0056b3; /* Darker blue on hover */
     transform: translateY(-2px); /* Button lifts slightly on hover */
 }
 
-.view-details-btn:active {
+.view-details-btn:active, .edit-btn:active, .delete-btn:active  {
     transform: translateY(1px); /* Button "pressed" effect */
 }
 
-.view-details-btn:focus {
+.view-details-btn:focus, .edit-btn:focus, .delete-btn:focus  {
     outline: none; /* Remove outline on focus */
     box-shadow: 0 0 5px rgba(0, 123, 255, 0.8); /* Add a focus ring */
 }

@@ -35,7 +35,7 @@ const motorcycleSchema = new Schema({
         ref: 'User',
         required: true
     }
-});
+}, { timestamps: true });
 
 const Motorcycle = model('Motorcycle', motorcycleSchema);
 

@@ -1,3 +1,4 @@
+import { getLastMotorcycles } from "../../hooks/useMotorcycle"
 import MotorcycleCard from "../motorcycle-card/MotorcycleCard"
 
 export default function Home() {
@@ -25,6 +26,9 @@ export default function Home() {
             owner: 'Stoyan'
         },
     ]
+
+    const lastMotorcycles = getLastMotorcycles();
+    console.log(lastMotorcycles);
     return (
         <div className="page-container">
             <h1>Welcome to Our Motorcycle Journey!</h1>
@@ -35,34 +39,8 @@ export default function Home() {
             <h2>The last added motorcycles:</h2>
 
             <div className="home-cards-wrapper">
-                {/* <div className="motorcycle-card">
-                    <img src="https://motorcycles.honda.bg/wp-content/uploads/sites/4/2024/11/600.jpg" alt="Motorcycle" className="motorcycle-image" />
-                    <div className="motorcycle-info">
-                        <h3 className="motorcycle-name">Honda CBR1000RR</h3>
-                        <p>Year: 2022</p>
-                        <p>Owner: Stoyan</p>
-                        <button className="view-details-btn">View Details</button>
-                    </div>
-                </div>
-                <div className="motorcycle-card">
-                    <img src="https://yamaha.ggmoto.net/wp-content/uploads/2024/01/2024-Yamaha-YZF1000R1-EU-Icon_Blue-360-Degrees-001-03.jpg" alt="Motorcycle" className="motorcycle-image" />
-                    <div className="motorcycle-info">
-                        <h3 className="motorcycle-name">Yamaha R1</h3>
-                        <p>Year: 2022</p>
-                        <p>Owner: Stoyan</p>
-                        <button className="view-details-btn">View Details</button>
-                    </div>
-                </div>
-                <div className="motorcycle-card">
-                    <img src="https://www.suzuki.ca/wp-content/uploads/GSX-R600ZM4_BQJ_Diagonal.jpg" alt="Motorcycle" className="motorcycle-image" />
-                    <div className="motorcycle-info">
-                        <h3 className="motorcycle-name">Suzuki GSXR1000</h3>
-                        <p>Year: 2022</p>
-                        <p>Owner: Stoyan</p>
-                        <button className="view-details-btn">View Details</button>
-                    </div>
-                </div> */}
-                {motorycles.map(motorcycle => < MotorcycleCard key={motorcycle._id} motorcycle={motorcycle} />)}
+               
+                {lastMotorcycles.map(motorcycle => < MotorcycleCard key={motorcycle._id} motorcycle={motorcycle} />)}
 
             </div>
         </div>

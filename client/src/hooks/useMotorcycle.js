@@ -42,3 +42,17 @@ export function useGetOneMotorcycle(motorcycleId) {
 
     return motorcycle;
 };
+
+export function getLastMotorcycles() {
+    const [lastMotorcycles, setLastMotorcycles] = useState([]);
+
+    useEffect(() => {
+
+        (async () => {
+            const result = await motorcyclesService.getLast();
+            setLastMotorcycles(result);
+        })();
+    }, []);
+
+    return lastMotorcycles;
+}
