@@ -10,6 +10,9 @@ export function useRegister() {
     const [error, setError] = useState(null);
 
     const registerHandler = async (values) => {
+        if(values.password !== values.confirmPassword) {
+            return setError('Passwords don\'t match!');
+        }
         setError(null);
 
         try {

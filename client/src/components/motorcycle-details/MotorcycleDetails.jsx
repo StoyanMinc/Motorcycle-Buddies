@@ -1,12 +1,16 @@
 import { useParams } from "react-router-dom"
 import { Link } from "react-router-dom";
 import { useGetOneMotorcycle } from "../../hooks/useMotorcycle.js";
+import { getUser } from "../../context/AuthContext.jsx";
 
 export default function MotorcycleDetails() {
 
     const { motorcycleId } = useParams();
     const motorcycle = useGetOneMotorcycle(motorcycleId);
-    console.log(motorcycle);
+    const { user } = getUser();
+    // if (user && motorcycle) {
+    //     const isOwner = motorcycle.owner._id === user.userId;
+    // }
     return (
         <div className="details-container">
             <h1>Motorcycle details</h1>
@@ -25,9 +29,10 @@ export default function MotorcycleDetails() {
                     <p className="motorcycle-description">{motorcycle.description}</p>
                     <p><strong>Likes:</strong> {motorcycle.likes?.length || 0}</p>
                     <div className="options-buttons">
-                        <Link to={`/motorcycles/${motorcycle._id}`} className="view-details-btn">View Full Details</Link>
                         <Link to={`/motorcycles/${motorcycle._id}`} className="edit-btn">Edit</Link>
                         <Link to={`/motorcycles/${motorcycle._id}`} className="delete-btn">Delete</Link>
+                        <Link to={`/motorcycles/${motorcycle._id}`} className="send-like-btn">Like</Link>
+
                     </div>
                 </div>
             </div>

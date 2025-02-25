@@ -16,7 +16,7 @@ const motorcycleSchema = new Schema({
     soldYear: {
         type: Number,
     },
-    imageUrl: {
+    image: {
         type: String,
         required: true
     },

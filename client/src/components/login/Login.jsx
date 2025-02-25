@@ -22,7 +22,7 @@ export default function Login() {
                 <h2>Login</h2>
                 <form method="POST" onSubmit={handleSubmit((values) => loginHandler(values))}>
                     <label htmlFor="username">Username</label>
-                    <input type="text" id="username" name="username" {...register('username')} />
+                    <input type="text" id="username" name="username" {...register('username')} autoComplete="off" />
 
                     <label htmlFor="password">Password:</label>
                     <input type="password" id="password" name="password" {...register('password')} />

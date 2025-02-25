@@ -1,9 +1,11 @@
 import { Link } from "react-router-dom";
 
 export default function MotorcycleCard({ motorcycle }) {
+    
+    const imageUrl = `http://localhost:3000/${motorcycle.image}`;
     return (
         <div className="motorcycle-card">
-            <img src={motorcycle.imageUrl} alt={motorcycle.model} className="motorcycle-image" />
+            <img src={imageUrl} alt={motorcycle.model} className="motorcycle-image" />
             <div className="motorcycle-info">
                 <h3 className="motorcycle-name">{motorcycle.model}</h3>
                 <p>Year: {motorcycle.year}</p>

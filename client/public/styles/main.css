@@ -12,7 +12,7 @@
     flex-direction: column;
     background-image: url('../images/sitebackground.jpg');
     background-size: cover;
-    overflow: hidden;
+    /* overflow: hidden; */
 }
 
 .site-container main {

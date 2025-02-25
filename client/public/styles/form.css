@@ -1,5 +1,5 @@
 .form-container {
-    background-color: rgba(0, 0, 0, 0.6);
+    background-color: rgba(0, 0, 0, 0.2);
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -26,8 +26,10 @@
 .form-container textarea {
     width: 100%;
     padding: 5px;
-    border: 1px solid #ddd;
     border-radius: 5px;
+    background-color: rgba(0, 0, 0, 0.5);
+    border: 2px solid black;
+    color: white;
 }
 
 .form-container input {
@@ -54,4 +56,47 @@
 
 .form-container button:hover {
     background-color: #0056b3;
+}
+
+input:focus, textarea:focus {
+    border-color: #3498db; /* Change border color */
+    outline: none; /* Remove default outline */
+    box-shadow: 0 0 5px rgba(52, 152, 219, 0.5); /* Add a subtle shadow */
+    transition: border-color 0.3s, box-shadow 0.3s; /* Smooth transition */
+}
+
+.image-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+    width: 100%;
+}
+
+.image-input {
+    display: none !important;
+}
+
+.image-label {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 120px;
+    height: 40px;
+    cursor: pointer;
+    background-color: #007BFF;
+    color: white;
+    border-radius: 8px;
+    font-size: 1em;
+    font-weight: bold;
+    transition: background-color 0.3s, transform 0.2s;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.image-label:hover {
+    background-color: #0056b3;
+}
+
+.image-label:active {
+    transform: scale(0.95);
 }

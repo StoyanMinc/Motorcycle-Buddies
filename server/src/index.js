@@ -3,6 +3,9 @@ import mongoose from 'mongoose';
 import cors from 'cors';
 
 import router from './router.js';
+import bodyParser from 'body-parser';
+import path from 'path';
+
 
 const app = express();
 
@@ -13,8 +16,12 @@ try {
     console.log(error.message);
 }
 
+const uploadDir = path.join(import.meta.dirname, '../uploadsImages');
+app.use('/uploadsImages', express.static(uploadDir));
+
 app.use(cors());
-app.use(json());
+// app.use(json());
+app.use(bodyParser.json({limit: '50mb'}));
 app.use(router);
 
 app.listen(3000, () => console.log('Server is listening on http://localhost:3000...'));

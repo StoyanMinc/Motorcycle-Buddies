@@ -1,5 +1,7 @@
 import { Router } from "express";
 import { motorcycleService } from "../services/motorcycleService.js";
+import fs from 'fs';
+import path from 'path';
 
 const motorcycleController = Router();
 
@@ -13,7 +15,7 @@ motorcycleController.get('/lasts', async (req, res) => {
     res.json(lastMotorycles);
 });
 
-motorcycleController.get('/:motorcycleId',async (req, res) => {
+motorcycleController.get('/:motorcycleId', async (req, res) => {
     const { motorcycleId } = req.params;
     const motorcycle = await motorcycleService.getOne(motorcycleId);
     res.json(motorcycle);
@@ -21,11 +23,13 @@ motorcycleController.get('/:motorcycleId',async (req, res) => {
 
 motorcycleController.post('/', async (req, res) => {
     const motorcycleData = req.body;
-    console.log(motorcycleData)
+    const buffer = Buffer.from(motorcycleData.image, "base64");
+    let filePath = `uploadsImages/${Date.now()}.${motorcycleData.imageType}`; // Adjust extension as needed
+    fs.writeFileSync(path.join(import.meta.dirname, "../..", filePath), buffer);
+    motorcycleData.image = filePath;
+    console.log(motorcycleData.image);
     const motorcycle = await motorcycleService.create(motorcycleData);
     res.json(motorcycle);
 });
-
-
 
 export default motorcycleController;

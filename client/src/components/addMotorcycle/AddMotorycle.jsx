@@ -1,42 +1,77 @@
 import { useForm } from 'react-hook-form';
 import { useCreateMotorcycle } from '../../hooks/useMotorcycle.js';
+import { useState } from 'react';
 
 export default function AddMotorcycle() {
-
-    const { register, handleSubmit } = useForm({
+    const [fileBase64, setFileBase64] = useState("");
+    const { register, handleSubmit, setValue } = useForm({
         defaultValues: {
             model: '',
             year: '',
             buyYear: '',
             soldYear: '',
-            imageUrl: '',
-            description: ''
+            image: '',
+            description: '',
+            imageType: '',
         }
     });
 
+    const handleImageChange = (e) => {
+        const image = e.target.files[0];
+        let image_split = image.name.split(".");
+        let image_type = image_split[image_split.length - 1];
+        setValue('imageType', image_type);
+        console.log(image_type);
+        console.log(image);
+        if (image) {
+            const reader = new FileReader();
+            reader.readAsDataURL(image); // Convert file to Base64
+            reader.onload = () => {
+                const base64File = reader.result.split(",")[1];
+                console.log(base64File);
+                setFileBase64(reader.result.split(",")[1]);
+                setValue('image', base64File);
+            };
+        }
+    };
+
+    // const submitHandler = (values) => console.log(values);
     const submitHandler = useCreateMotorcycle();
     return (
         <div className="page-container">
             <div className="form-container">
                 <h2>Motorcycle Details Form</h2>
                 <form method="POST" onSubmit={handleSubmit((values) => submitHandler(values))}>
-                    <label htmlFor="model">Model:</label>
-                    <input type="text" id="model" name="model" required {...register('model')}/>
+                    <div>
 
-                    <label htmlFor="year">Year:</label>
-                    <input type="number" id="year" name="year" required {...register('year')}/>
+                        <label htmlFor="model">Model:</label>
+                        <input type="text" id="model" name="model" required {...register('model')} autoComplete="off" />
+                    </div>
+                    <div>
 
-                    <label htmlFor="buyYear">Year on Buying:</label>
-                    <input type="number" id="buyYear" name="buyYear" required {...register('buyYear')}/>
+                        <label htmlFor="year">Year:</label>
+                        <input type="number" id="year" name="year" required {...register('year')} />
+                    </div>
 
-                    <label htmlFor="soldYear">Year on Sold:</label>
-                    <input type="number" id="soldYear" name="soldYear" {...register('soldYear')}/>
+                    <div>
+                        <label htmlFor="buyYear">Year on Buying:</label>
+                        <input type="number" id="buyYear" name="buyYear" required {...register('buyYear')} />
+                    </div>
 
-                    <label htmlFor="imageUrl">Image URL:</label>
-                    <input type="url" id="imageUrl" name="imageUrl" required {...register('imageUrl')}/>
+                    <div>
+                        <label htmlFor="soldYear">Year on Sold:</label>
+                        <input type="number" id="soldYear" name="soldYear" {...register('soldYear')} autoComplete="off" />
+                    </div>
 
-                    <label htmlFor="description">Description:</label>
-                    <textarea id="description" name="description" required {...register('description')}></textarea>
+                    <div className="image-container">
+                        <input className="image-input" type="file" name='image' id='image' onChange={handleImageChange}/>
+                        <label htmlFor="image" className='image-label'>Избери снимка</label>
+                    </div>
+
+                    <div>
+                        <label htmlFor="description">Description:</label>
+                        <textarea id="description" name="description" required {...register('description')}></textarea>
+                    </div>
 
                     <button type="submit">Submit</button>
                 </form>

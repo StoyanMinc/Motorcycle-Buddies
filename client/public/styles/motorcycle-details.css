@@ -18,8 +18,9 @@
     border: 1px solid #ddd;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    background-color: #fff;
+    background-color:rgba(0, 0, 0, 0.4);
     transition: transform 0.2s, box-shadow 0.2s;
+    color: white;
 }
 
 .motorcycle-details-card:hover {
@@ -38,20 +39,19 @@
 .motorcycle-info {
     padding: 0 8px;
     text-align: center;
+    line-height: 20px;
 }
 
 .motorcycle-model {
     font-size: 1.5rem;
     margin: 8px 0;
-    color: #333;
 }
 
 .motorcycle-description {
     margin: 8px 0;
-    color: #555;
 }
 
-.view-details-btn, .edit-btn, .delete-btn {
+.view-details-btn, .send-like-btn, .edit-btn, .delete-btn {
     display: inline-block;
     padding: 8px 16px;
     margin-top: 12px;
