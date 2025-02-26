@@ -9,7 +9,6 @@ export function useCreateMotorcycle() {
     const createHandler = async (values) => {
         values.owner = user.userId
         const result = await motorcyclesService.create(values);
-        console.log(result)
         navigate('/motorcycles');
     };
     return createHandler;

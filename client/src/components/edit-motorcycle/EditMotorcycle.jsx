@@ -1,8 +1,15 @@
-import { useForm } from 'react-hook-form';
-import { useCreateMotorcycle } from '../../hooks/useMotorcycle.js';
+import { useForm } from "react-hook-form"
+import { useEditMotorcycle, useGetOneMotorcycle } from "../../hooks/useMotorcycle";
+import { useParams } from "react-router-dom";
+import { useEffect } from "react";
 
-export default function AddMotorcycle() {
-    const { register, handleSubmit, setValue } = useForm({
+export default function EditMotorcycle() {
+
+    const {motorcycleId} = useParams();
+
+    const motorcycle = useGetOneMotorcycle(motorcycleId);
+
+    const {register, handleSubmit, setValue } = useForm({
         defaultValues: {
             model: '',
             year: '',
@@ -14,6 +21,16 @@ export default function AddMotorcycle() {
         }
     });
 
+    useEffect(() => {
+        if (motorcycle) {
+            setValue('model', motorcycle.model || '');
+            setValue('year', motorcycle.year || '');
+            setValue('buyYear', motorcycle.buyYear || '');
+            setValue('soldYear', motorcycle.soldYear || '');
+            setValue('description', motorcycle.description || '');
+            setValue('imageType', motorcycle.imageType || '');
+        }
+    }, [motorcycle, setValue]);
     const handleImageChange = (e) => {
         const image = e.target.files[0];
         let image_split = image.name.split(".");
@@ -29,12 +46,13 @@ export default function AddMotorcycle() {
         }
     };
 
-    const submitHandler = useCreateMotorcycle();
+    const submitHandler = useEditMotorcycle();
+    
     return (
         <div className="page-container">
             <div className="form-container">
-                <h2>Post Your Motorcycle</h2>
-                <form method="POST" onSubmit={handleSubmit((values) => submitHandler(values))}>
+                <h2>Edit Your Motorcycle</h2>
+                <form method="POST" onSubmit={handleSubmit((values) => submitHandler(motorcycleId, values))}>
                     <div>
 
                         <label htmlFor="model">Model:</label>
@@ -57,7 +75,7 @@ export default function AddMotorcycle() {
                     </div>
 
                     <div className="image-container">
-                        <input className="image-input" type="file" name='image' id='image' onChange={handleImageChange}/>
+                        <input className="image-input" type="file" name='image' id='image' onChange={handleImageChange} />
                         <label htmlFor="image" className='image-label'>Избери снимка</label>
                     </div>
 

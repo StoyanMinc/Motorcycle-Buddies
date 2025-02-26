@@ -49,6 +49,10 @@ export default function MotorcycleDetails() {
         } catch (error) {
             console.log(error.message);
         }
+    };
+
+    const deleteMotorcycleHandler = async (motorcycleId) => {
+        
     }
     return (
         <div className="details-container">

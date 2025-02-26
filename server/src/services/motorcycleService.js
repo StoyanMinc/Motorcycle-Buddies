@@ -8,6 +8,8 @@ const getOne = (_id) => Motorcycle.findById(_id).populate('owner', 'username');
 
 const create = (motorcycleData) => Motorcycle.create(motorcycleData);
 
+const edit = (motorcycleId, motorcycleData) => Motorcycle.findByIdAndUpdate(motorcycleId, motorcycleData);
+
 const remove = (_id) => Motorcycle.findByIdAndDelete(_id)
 
 const sendLike = async (userId, motorcycleId) => {
@@ -34,6 +36,7 @@ export const motorcycleService = {
     getLasts,
     create,
     getOne,
+    edit,
     remove,
     sendLike,
 }
