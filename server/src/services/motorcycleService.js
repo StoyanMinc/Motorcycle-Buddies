@@ -30,6 +30,8 @@ const sendLike = async (userId, motorcycleId) => {
     return motorcycle;
 };
 
+const deleteMotorcycle = (motorcycleId) => Motorcycle.findByIdAndDelete(motorcycleId)
+
 
 export const motorcycleService = {
     getAll,
@@ -39,4 +41,5 @@ export const motorcycleService = {
     edit,
     remove,
     sendLike,
+    deleteMotorcycle,
 }

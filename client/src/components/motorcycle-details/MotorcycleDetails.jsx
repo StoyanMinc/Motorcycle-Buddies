@@ -8,6 +8,8 @@ import { motorcyclesService } from "../../api/motorcycles-api.js";
 
 export default function MotorcycleDetails() {
 
+    const navigate = useNavigate();
+
     const { motorcycleId } = useParams();
     const [isOwner, setIsOwner] = useState(false);
     const [isLiked, setIsLiked] = useState(false);
@@ -51,8 +53,11 @@ export default function MotorcycleDetails() {
         }
     };
 
+    const editButtonHandler = (motorcycleId) => navigate(`/motorcycles/${motorcycleId}/edit`);
+
     const deleteMotorcycleHandler = async (motorcycleId) => {
-        
+        await motorcyclesService.deleteMotorcycle(motorcycleId);
+        navigate('/');
     }
     return (
         <div className="details-container">
@@ -75,8 +80,8 @@ export default function MotorcycleDetails() {
                         <div className="options-buttons">
                             {isOwner
                                 ? (<>
-                                    <Link to={`/motorcycles/${motorcycle._id}/edit`} className="edit-btn">Edit</Link>
-                                    <Link to={`/motorcycles/${motorcycle._id}/delete`} className="delete-btn">Delete</Link>
+                                    <button onClick={() => editButtonHandler(motorcycle._id)} className="edit-btn">Edit</button>
+                                    <button className="delete-btn" onClick={() => deleteMotorcycleHandler(motorcycle._id)}>Delete</button>
                                 </>)
                                 : (isLiked ? <span className="send-like-btn">Liked!</span> : <button className="send-like-btn" onClick={sendLikeHandler}>Like</button>)
                             }

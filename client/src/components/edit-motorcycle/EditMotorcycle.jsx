@@ -9,6 +9,7 @@ export default function EditMotorcycle() {
 
     const motorcycle = useGetOneMotorcycle(motorcycleId);
 
+    console.log(motorcycle);
     const {register, handleSubmit, setValue } = useForm({
         defaultValues: {
             model: '',
@@ -31,6 +32,7 @@ export default function EditMotorcycle() {
             setValue('imageType', motorcycle.imageType || '');
         }
     }, [motorcycle, setValue]);
+    
     const handleImageChange = (e) => {
         const image = e.target.files[0];
         let image_split = image.name.split(".");

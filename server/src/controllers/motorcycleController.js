@@ -36,17 +36,25 @@ motorcycleController.post('/', async (req, res) => {
 motorcycleController.put('/:motorcycleId/edit', async (req, res) => {
     const { motorcycleId } = req.params;
     const motorcycleData = req.body;
-    const buffer = Buffer.from(motorcycleData.image, 'base64');
-
     const oldMotorcycleData = await motorcycleService.getOne(motorcycleId);
-    const oldImagePath = path.join(import.meta.dirname, '../..', oldMotorcycleData.image);
-    if(fs.existsSync(oldImagePath)) {
-        fs.unlinkSync(oldImagePath);
-    }
 
-    let newFilePath = `uploadsImages/${Date.now()}.${motorcycleData.imageType}`; // Adjust extension as needed
-    fs.writeFileSync(path.join(import.meta.dirname, '../..', newFilePath), buffer);
-    motorcycleData.image = newFilePath;
+    if (motorcycleData.image) {
+        const buffer = Buffer.from(motorcycleData.image, 'base64');
+        if(oldMotorcycleData.image !== '') {
+
+            const oldImagePath = path.join(import.meta.dirname, '../..', oldMotorcycleData.image);
+            if (fs.existsSync(oldImagePath)) {
+                fs.unlinkSync(oldImagePath);
+            }
+        }
+
+        let newFilePath = `uploadsImages/${Date.now()}.${motorcycleData.imageType}`; // Adjust extension as needed
+        fs.writeFileSync(path.join(import.meta.dirname, '../..', newFilePath), buffer);
+        motorcycleData.image = newFilePath;
+    } else {
+        motorcycleData.image = oldMotorcycleData.image;
+    }
+    
     const motorcycle = await motorcycleService.edit(motorcycleId, motorcycleData);
     res.json(motorcycle);
 });
@@ -57,6 +65,12 @@ motorcycleController.get('/:motorcycleId/send-like', async (req, res) => {
 
     const motorcycle = await motorcycleService.sendLike(userId, motorcycleId);
     res.json(motorcycle);
+});
+
+motorcycleController.delete('/:motorcycleId/delete', async (req, res) => {
+    const { motorcycleId } = req.params;
+    await motorcycleService.deleteMotorcycle(motorcycleId);
+    res.send({ message: 'Delete Successfully!' })
 });
 
 export default motorcycleController;
