@@ -21,3 +21,52 @@
     max-height: 600px; /* Set max height to allow scrolling */
     scroll-behavior: smooth; /* Smooth scrolling */
   }
+
+.search-bar-container {
+    border-radius: 8px;
+    max-width: 800px;
+    width: 100%;
+    margin: 0 auto 20px;
+    display: flex;
+    gap: 20px;
+}
+
+.search-bar-container input {
+    width: 40%; /* Adjust width to make room for button */
+    padding: 10px;
+    margin-top: 10px;
+    border-radius: 5px;
+    background-color: rgba(0, 0, 0, 0.5);
+    border: 2px solid black;
+    color: white;
+    font-size: 1em;
+}
+
+.search-bar-container input:focus {
+    border-color: #3498db;
+    outline: none;
+    box-shadow: 0 0 5px rgba(52, 152, 219, 0.5);
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.search-bar-container .search-button {
+    margin-top: 10px; /* Align with the input fields */
+    background-color: #007BFF;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1.1em;
+    width: 20%; /* Adjust width to fit alongside inputs */
+}
+
+.search-bar-container .search-button:hover {
+    background-color: #0056b3;
+}
+
+.search-bar-container .search-button:active {
+    transform: scale(0.95);
+}
+
+  

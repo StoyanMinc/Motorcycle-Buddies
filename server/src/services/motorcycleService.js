@@ -1,8 +1,8 @@
 import Motorcycle from "../models/Motorcycle.js";
 
-const getAll = () => Motorcycle.find({});
+const getAll = () => Motorcycle.find({})
 
-const getLasts = () => Motorcycle.find().sort({createdAt: -1}).limit(3).populate('owner', 'username');
+const getLasts = () => Motorcycle.find().sort({ createdAt: -1 }).limit(3).populate('owner', 'username');
 
 const getOne = (_id) => Motorcycle.findById(_id).populate('owner', 'username');
 
@@ -15,11 +15,11 @@ const remove = (_id) => Motorcycle.findByIdAndDelete(_id)
 const sendLike = async (userId, motorcycleId) => {
     const motorcycle = await getOne(motorcycleId);
 
-    if(motorcycle.owner == userId) {
+    if (motorcycle.owner == userId) {
         throw new Error("You can\'n like own motorcycles!");
     }
 
-    if(motorcycle.likes.includes(userId)) {
+    if (motorcycle.likes.includes(userId)) {
         throw new Error("You already liked motorcycle!");
     }
 
@@ -32,6 +32,21 @@ const sendLike = async (userId, motorcycleId) => {
 
 const deleteMotorcycle = (motorcycleId) => Motorcycle.findByIdAndDelete(motorcycleId)
 
+const getSearched = (model, year) => {
+    console.log(model, year);
+    let query = {};
+
+    if(model) {
+        query.model = new RegExp(model, 'i');
+    }
+
+    if(year) {
+        query.year = year;
+    }
+
+    console.log(query)
+    return Motorcycle.find(query);
+}
 
 export const motorcycleService = {
     getAll,
@@ -42,4 +57,5 @@ export const motorcycleService = {
     remove,
     sendLike,
     deleteMotorcycle,
+    getSearched,
 }

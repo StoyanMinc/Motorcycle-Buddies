@@ -2,14 +2,20 @@ import { Router } from "express";
 import { motorcycleService } from "../services/motorcycleService.js";
 import fs from 'fs';
 import path from 'path';
-import { modelNames } from "mongoose";
-
 const motorcycleController = Router();
+
 
 motorcycleController.get('/', async (req, res) => {
     const motorcycles = await motorcycleService.getAll();
     res.json(motorcycles);
-})
+});
+
+motorcycleController.get('/search', async (req, res) => {
+   const {model, year} = req.query;
+   console.log(model, year);
+   const result = await motorcycleService.getSearched(model, year);
+   res.json(result);
+});
 
 motorcycleController.get('/lasts', async (req, res) => {
     const lastMotorycles = await motorcycleService.getLasts();

@@ -14,12 +14,12 @@ export function useCreateMotorcycle() {
     return createHandler;
 };
 
-export function useGetAllMotorcycles() {
+export function useGetAllMotorcycles(searchingParams) {
     const [motorcycles, setMotorcycles] = useState([]);
 
     useEffect(() => {
         (async () => {
-            const result = await motorcyclesService.getAll();
+            const result = await motorcyclesService.getAll(searchingParams);
             setMotorcycles(result);
 
         })();

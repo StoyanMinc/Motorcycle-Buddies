@@ -6,6 +6,8 @@ const create = (values) => post(BASE_URL, values);
 
 const getAll = () => get(BASE_URL);
 
+const getSearched = (searchParams) => get(`${BASE_URL}/search?${searchParams}`);
+
 const getOne = (motorcycleId) => get(`${BASE_URL}/${motorcycleId}`);
 
 const getLast = () => get(BASE_URL + '/lasts');
@@ -24,5 +26,5 @@ export const motorcyclesService = {
     sendLike,
     editMotorcycle,
     deleteMotorcycle,
-    
+    getSearched
 };

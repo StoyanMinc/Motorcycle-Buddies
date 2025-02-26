@@ -1,5 +1,4 @@
 import { useParams, useNavigate } from "react-router-dom"
-import { Link } from "react-router-dom";
 
 import { useGetOneMotorcycle } from "../../hooks/useMotorcycle.js";
 import { getUser } from "../../context/AuthContext.jsx";
