@@ -32,4 +32,12 @@ motorcycleController.post('/', async (req, res) => {
     res.json(motorcycle);
 });
 
+motorcycleController.get('/:motorcycleId/send-like', async (req, res) => {
+    const {motorcycleId} = req.params;
+    const userId = req.query.userId;
+
+    const motorcycle = await motorcycleService.sendLike(userId, motorcycleId);
+    res.json(motorcycle);
+});
+
 export default motorcycleController;

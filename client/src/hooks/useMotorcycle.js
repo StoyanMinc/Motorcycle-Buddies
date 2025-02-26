@@ -10,7 +10,7 @@ export function useCreateMotorcycle() {
         values.owner = user.userId
         const result = await motorcyclesService.create(values);
         console.log(result)
-        navigate('/');
+        navigate('/motorcycles');
     };
     return createHandler;
 };
@@ -55,4 +55,17 @@ export function getLastMotorcycles() {
     }, []);
 
     return lastMotorcycles;
-}
+};
+
+export function useEditMotorcycle() {
+
+    const { user } = getUser();
+    const navigate = useNavigate();
+    const editHandler = async (motorcycleId, values) => {
+        values.owner = user.userId
+        const result = await motorcyclesService.editMotorcycle(motorcycleId, values);
+        console.log(result)
+        navigate('/motorcycles');
+    };
+    return editHandler;
+};

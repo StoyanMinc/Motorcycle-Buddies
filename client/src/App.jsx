@@ -11,6 +11,7 @@ import Login from "./components/login/Login"
 import Register from "./components/register/Register"
 import Logout from "./components/logout/Logout"
 import MotorcycleDetails from "./components/motorcycle-details/MotorcycleDetails"
+import EditMotorcycle from "./components/edit-motorcycle/EditMotorcycle"
 
 function App() {
 
@@ -25,6 +26,7 @@ function App() {
                         <Route path="/" element={<Home />} />
                         <Route path="/motorcycles" element={<Motorcycles />} />
                         <Route path="/motorcycles/post" element={<AddMotorcycle />} />
+                        <Route path="/motorcycles/:motorcycleId/edit" element={<EditMotorcycle />} />
                         <Route path="/profile" element={<Profile />} />
                         <Route path="/login" element={<Login />} />
                         <Route path="/register" element={<Register />} />
