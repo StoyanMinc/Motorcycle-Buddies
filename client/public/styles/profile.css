@@ -1,0 +1,93 @@
+.profile-container {
+    display: flex;
+    max-width: 100%;
+    width: 100%;
+    gap: 10%;
+}
+
+.profile-side-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    cursor: pointer;
+    max-width: 150px;
+    width: 100%;
+}
+
+.profile-side-panel span {
+    color: #d3d3d3;
+    text-decoration: none;
+    font-size: 0.8em;
+    font-weight: bold;
+    padding: 6px 12px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.profile-side-panel span:hover {
+    background-color: #007BFF;
+    transform: translateY(-2px);
+}
+
+.profile-side-panel span:focus {
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.8);
+}
+
+.profile-info-container {
+    display: flex;
+    flex-direction: column;
+    margin-left: 10%;
+}
+
+.profile-picture-container img {
+    width: 150px;
+    border-radius: 50%;
+    margin-top: 10px;
+}
+
+.profile-container button, .profile-change-btn {
+    margin-right: 10px;
+    border-radius: 6px;
+    border: none;
+    padding: 8px 10px;
+    font-weight: 700;
+}
+
+.profile-image-settings-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.profile-change-btn {
+    background-color: #0056b3;
+    color: white;
+}
+
+.change-image-container input {
+    display: none;
+}
+
+.profile-delete-btn {
+    background-color: #ebeaea;
+    color: red;
+}
+
+.profile-save-btn {
+    background-color: gray;
+    color: white;
+}
+
+.profile-header-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 100px;
+    margin-bottom: 20px;
+}
+
+.profile-picture-container {
+    display: flex;
+    flex-direction: column;
+}

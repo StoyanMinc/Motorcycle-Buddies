@@ -9,7 +9,6 @@ export default function EditMotorcycle() {
 
     const motorcycle = useGetOneMotorcycle(motorcycleId);
 
-    console.log(motorcycle);
     const {register, handleSubmit, setValue } = useForm({
         defaultValues: {
             model: '',

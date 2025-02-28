@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useGetAllMotorcycles } from "../../hooks/useMotorcycle.js"
+// import { useGetAllMotorcycles } from "../../hooks/useMotorcycle.js"
 import MotorcycleCard from "../motorcycle-card/MotorcycleCard.jsx";
 import { motorcyclesService } from "../../api/motorcycles-api.js";
 
@@ -17,35 +17,28 @@ export default function Motorcycles() {
 
     useEffect(() => {
 
-        if(searchingParams.model !== '' || searchingParams.year !== '') {
+        if (searchingParams.model !== '' || searchingParams.year !== '') {
             const queryParams = new URLSearchParams({
-                model:searchingParams.model,
+                model: searchingParams.model,
                 year: searchingParams.year
             });
-           setQueryParams(queryParams.toString());
+            setQueryParams(queryParams.toString());
         }
 
-        console.log(queryParams.toString());
-    },[searchingParams.model, searchingParams.year]);
-    
-    
-    useEffect(() => {
-        console.log("New motorcycles");
-    },[motorcycles]);
+    }, [searchingParams.model, searchingParams.year]);
 
-    // const GetInitialMotorcycles = async () => {
-    //     const result = await motorcyclesService.getAll();
-    //     setMotorcycles(result);
-    // }
+
+    useEffect(() => {
+        (async () => {
+            const result = await motorcyclesService.getAll();
+            setMotorcycles(result);
+        })()
+    }, []);
 
     const searchHandler = async () => {
         const result = await motorcyclesService.getSearched(queryParams);
-       
-        console.log(result);
         setMotorcycles(result);
     }
-
-    // GetInitialMotorcycles();
 
     return (
         <div className="page-container">

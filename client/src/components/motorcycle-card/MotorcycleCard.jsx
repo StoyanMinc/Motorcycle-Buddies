@@ -8,8 +8,8 @@ export default function MotorcycleCard({ motorcycle }) {
             <img src={imageUrl} alt={motorcycle.model} className="motorcycle-image" />
             <div className="motorcycle-info">
                 <h3 className="motorcycle-name">{motorcycle.model}</h3>
+                <p>Owner: <strong>{motorcycle.owner.username}</strong></p>
                 <p>Year: {motorcycle.year}</p>
-                <p>Owner: {motorcycle.owner.username}</p>
                 <Link to={`/motorcycles/${motorcycle._id}`} className="view-details-btn">View Details</Link>
             </div>
         </div>

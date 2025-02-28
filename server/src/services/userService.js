@@ -1,23 +1,23 @@
 import User from '../models/User.js';
-import { compare, } from 'bcrypt';
+import { compare, hash } from 'bcrypt';
 import { generateToken } from '../utils/tokenUtil.js';
 
 const register = async (formData) => {
     const { username, password } = formData;
-    
-    const existingUser = await User.findOne({username});
-    if(existingUser) {
+
+    const existingUser = await User.findOne({ username });
+    if (existingUser) {
         throw new Error("Username already exist!");
     }
-    
+
     const result = await User.create({ username, password });
-    
+
     const token = await generateToken(result);
 
     const userData = {
         username: result.username,
         _id: result._id,
-        accessToken:token
+        accessToken: token
     }
     return userData;
 };
@@ -35,17 +35,32 @@ const login = async (formData) => {
     }
 
     const token = await generateToken(result);
-    
+
     const userData = {
         username: result.username,
         _id: result._id,
-        accessToken:token
+        accessToken: token
     }
     return userData;
 };
 
+const changePassword = async (values) => {
+    const { userId, oldPassword, newPassword } = values;
+    const result = await User.findById(userId);
+    const isValid = await compare(oldPassword, result.password);
+    if (!isValid) {
+        throw new Error("Old password is invalid!");
+    }
+
+    const hashedPassword = await hash(newPassword, 12);
+    await User.findByIdAndUpdate(userId, {password: hashedPassword});
+    return ('Password updated successfully!');
+}
+
 export const userService = {
     register,
-    login
+    login,
+    changePassword,
+
 };
 

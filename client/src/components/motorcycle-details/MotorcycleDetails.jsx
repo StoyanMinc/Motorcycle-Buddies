@@ -69,12 +69,12 @@ export default function MotorcycleDetails() {
                 />
                 <div className="motorcycle-info">
                     <h2 className="motorcycle-model">{motorcycle.model}</h2>
-                    <p><strong>Year:</strong> {motorcycle.year}</p>
-                    <p><strong>Buy Year:</strong> {motorcycle.buyYear}</p>
-                    <p><strong>Sold Year:</strong> {motorcycle.soldYear || 'Still Owned'}</p>
-                    <p><strong>Owner:</strong> {motorcycle.owner?.username}</p>
+                    <p>Owner: <strong>{motorcycle.owner?.username}</strong></p>
+                    <p>Year:<strong>{motorcycle.year}</strong> </p>
+                    <p>Buy Year: <strong>{motorcycle.buyYear}</strong> </p>
+                    <p>Sold Year: <strong>{motorcycle.soldYear || 'Still Owned'}</strong></p>
                     <p className="motorcycle-description">{motorcycle.description}</p>
-                    <p><strong>Likes:</strong> {likes}</p>
+                    <p>Likes: <strong>{likes}</strong></p>
                     {user &&
                         <div className="options-buttons">
                             {isOwner

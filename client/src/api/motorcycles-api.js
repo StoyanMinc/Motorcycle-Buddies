@@ -18,6 +18,8 @@ const editMotorcycle = (motorcycleId, values) => put(`${BASE_URL}/${motorcycleId
 
 const deleteMotorcycle = (motorcycleId) => del(`${BASE_URL}/${motorcycleId}/delete`);
 
+const getUserMotorcycles = (userId) => get(`${BASE_URL}/${userId}/motorcycles`);
+
 export const motorcyclesService = {
     create,
     getAll,
@@ -26,5 +28,6 @@ export const motorcyclesService = {
     sendLike,
     editMotorcycle,
     deleteMotorcycle,
-    getSearched
+    getSearched,
+    getUserMotorcycles
 };

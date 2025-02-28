@@ -11,10 +11,9 @@ motorcycleController.get('/', async (req, res) => {
 });
 
 motorcycleController.get('/search', async (req, res) => {
-   const {model, year} = req.query;
-   console.log(model, year);
-   const result = await motorcycleService.getSearched(model, year);
-   res.json(result);
+    const { model, year } = req.query;
+    const result = await motorcycleService.getSearched(model, year);
+    res.json(result);
 });
 
 motorcycleController.get('/lasts', async (req, res) => {
@@ -28,13 +27,18 @@ motorcycleController.get('/:motorcycleId', async (req, res) => {
     res.json(motorcycle);
 });
 
+motorcycleController.get('/:userId/motorcycles', async (req, res) => {
+    const { userId } = req.params;
+    const motorcycles = await motorcycleService.getUserMotorcycles(userId);
+    res.json(motorcycles);
+});
+
 motorcycleController.post('/', async (req, res) => {
     const motorcycleData = req.body;
     const buffer = Buffer.from(motorcycleData.image, "base64");
     let filePath = `uploadsImages/${Date.now()}.${motorcycleData.imageType}`; // Adjust extension as needed
     fs.writeFileSync(path.join(import.meta.dirname, "../..", filePath), buffer);
     motorcycleData.image = filePath;
-    console.log(motorcycleData.image);
     const motorcycle = await motorcycleService.create(motorcycleData);
     res.json(motorcycle);
 });
@@ -46,7 +50,7 @@ motorcycleController.put('/:motorcycleId/edit', async (req, res) => {
 
     if (motorcycleData.image) {
         const buffer = Buffer.from(motorcycleData.image, 'base64');
-        if(oldMotorcycleData.image !== '') {
+        if (oldMotorcycleData.image !== '') {
 
             const oldImagePath = path.join(import.meta.dirname, '../..', oldMotorcycleData.image);
             if (fs.existsSync(oldImagePath)) {
@@ -60,7 +64,7 @@ motorcycleController.put('/:motorcycleId/edit', async (req, res) => {
     } else {
         motorcycleData.image = oldMotorcycleData.image;
     }
-    
+
     const motorcycle = await motorcycleService.edit(motorcycleId, motorcycleData);
     res.json(motorcycle);
 });

@@ -63,8 +63,20 @@ export function useEditMotorcycle() {
     const editHandler = async (motorcycleId, values) => {
         values.owner = user.userId
         const result = await motorcyclesService.editMotorcycle(motorcycleId, values);
-        console.log(result)
         navigate('/motorcycles');
     };
     return editHandler;
 };
+
+export function useGetUserMotorcycles (userId) {
+    const [motorycles, setMotorcycles] = useState([]);
+
+    useEffect(() => {
+        (async () => {
+            const result = await motorcyclesService.getUserMotorcycles(userId);
+            setMotorcycles(result);
+        })();
+    },[])
+
+    return motorycles;
+}

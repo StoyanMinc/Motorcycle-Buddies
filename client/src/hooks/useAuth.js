@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 
-import { login, logout, register } from "../api/auth-api.js"
+import {  login, logout, register } from "../api/auth-api.js"
 import { getUser } from "../context/AuthContext.jsx";
 import { useState } from "react";
 
@@ -10,7 +10,7 @@ export function useRegister() {
     const [error, setError] = useState(null);
 
     const registerHandler = async (values) => {
-        if(values.password !== values.confirmPassword) {
+        if (values.password !== values.confirmPassword) {
             return setError('Passwords don\'t match!');
         }
         setError(null);
@@ -28,8 +28,9 @@ export function useRegister() {
         }
     };
 
-    return {registerHandler, error};
+    return { registerHandler, error };
 };
+
 
 export function useLogin() {
     const { setUser } = getUser();
@@ -40,7 +41,6 @@ export function useLogin() {
         setError(null);
         try {
             const userData = await login(values.username, values.password);
-            console.log(userData);
 
             setUser({
                 username: userData.username,

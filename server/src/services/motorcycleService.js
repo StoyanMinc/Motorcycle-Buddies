@@ -33,7 +33,6 @@ const sendLike = async (userId, motorcycleId) => {
 const deleteMotorcycle = (motorcycleId) => Motorcycle.findByIdAndDelete(motorcycleId)
 
 const getSearched = (model, year) => {
-    console.log(model, year);
     let query = {};
 
     if(model) {
@@ -44,10 +43,10 @@ const getSearched = (model, year) => {
         query.year = year;
     }
 
-    console.log(query)
     return Motorcycle.find(query);
 }
 
+const getUserMotorcycles = (userId) => Motorcycle.find({owner: userId});
 export const motorcycleService = {
     getAll,
     getLasts,
@@ -58,4 +57,6 @@ export const motorcycleService = {
     sendLike,
     deleteMotorcycle,
     getSearched,
+    getUserMotorcycles,
+    
 }

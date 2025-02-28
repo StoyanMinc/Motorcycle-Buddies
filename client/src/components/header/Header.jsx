@@ -3,7 +3,7 @@ import { getUser } from "../../context/AuthContext";
 
 export default function Header() {
 
-    const {user} = getUser();
+    const { user } = getUser();
     return (
         <div className="header-container">
             <h1>This is our Passion!</h1>
