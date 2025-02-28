@@ -41,6 +41,7 @@ export function useLogin() {
         setError(null);
         try {
             const userData = await login(values.username, values.password);
+            console.log(userData)
 
             setUser({
                 username: userData.username,

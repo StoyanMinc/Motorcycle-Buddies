@@ -17,7 +17,9 @@ try {
 }
 
 const uploadDir = path.join(import.meta.dirname, '../uploadsImages');
+const uploadUserDir = path.join(import.meta.dirname, '../uploadsUserImages');
 app.use('/uploadsImages', express.static(uploadDir));
+app.use('/uploadsUserImages', express.static(uploadUserDir));
 
 app.use(cors());
 // app.use(json());

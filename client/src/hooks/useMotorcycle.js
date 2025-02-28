@@ -68,12 +68,14 @@ export function useEditMotorcycle() {
     return editHandler;
 };
 
-export function useGetUserMotorcycles (userId) {
+export function useGetUserMotorcycles () {
+    const { user } = getUser();
+
     const [motorycles, setMotorcycles] = useState([]);
 
     useEffect(() => {
         (async () => {
-            const result = await motorcyclesService.getUserMotorcycles(userId);
+            const result = await motorcyclesService.getUserMotorcycles(user.userId);
             setMotorcycles(result);
         })();
     },[])

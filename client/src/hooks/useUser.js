@@ -1,8 +1,21 @@
-import { useNavigate } from "react-router-dom";
 import { getUser } from "../context/AuthContext";
-import { useState } from "react";
-// import { changePassword } from "../api/auth-api";
-import { changePassword, changeProfileImage } from "../api/user-api";
+import { use, useEffect, useState } from "react";
+import { changePassword, changeProfileImage, getUseFromServer } from "../api/user-api";
+
+export function useGetUser() {
+    const { user } = getUser();
+
+    const [userData, setUserData] = useState({});
+
+    useEffect(() => {
+        (async () => {
+            const result = await getUseFromServer(user.userId);
+            setUserData(result);
+        })();
+    },[]);
+
+    return userData;
+}
 
 export function useChangePassword() {
     const { user } = getUser();

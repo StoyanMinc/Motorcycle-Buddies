@@ -44,6 +44,21 @@ const login = async (formData) => {
     return userData;
 };
 
+
+const getUser = async (userId) => {
+    try {
+        const userData = await User.findById(userId);
+        return userData;
+    } catch (error) {
+        console.log(error.message);
+    }
+};
+
+const changeImage = async (userId, image) => {
+    const user = await User.findByIdAndUpdate(userId, { image: image });
+    return user;
+}
+
 const changePassword = async (values) => {
     const { userId, oldPassword, newPassword } = values;
     const result = await User.findById(userId);
@@ -53,7 +68,7 @@ const changePassword = async (values) => {
     }
 
     const hashedPassword = await hash(newPassword, 12);
-    await User.findByIdAndUpdate(userId, {password: hashedPassword});
+    await User.findByIdAndUpdate(userId, { password: hashedPassword });
     return ('Password updated successfully!');
 }
 
@@ -61,6 +76,8 @@ export const userService = {
     register,
     login,
     changePassword,
+    getUser,
+    changeImage,
 
 };
 

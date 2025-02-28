@@ -1,5 +1,8 @@
 import { Router } from "express";
+import fs from 'fs';
+
 import { userService } from "../services/userService.js";
+import path from "path";
 
 const authController = Router();
 
@@ -49,8 +52,34 @@ authController.put('/change-password', async (req, res) => {
 });
 
 authController.put('/change-image', async (req, res) => {
-    const {userId, image, imageType} = req.body;
-    res.json({message: 'image send!'});
+    const { userId, image, imageType } = req.body;
+    const userData = await userService.getUser(userId);
+
+    console.log(userData);
+    const buffer = Buffer.from(image, 'base64');
+    if (userData.image) {
+
+        const oldImagePath = path.join(import.meta.dirname, '../..', userData.image);
+        if (fs.existsSync(oldImagePath)) {
+            fs.unlinkSync(oldImagePath);
+        }
+    }
+
+    const newFilePath = `uploadsUserImages/${Date.now()}.${imageType}`;
+    fs.writeFileSync(path.join(import.meta.dirname, '../..', newFilePath), buffer);
+    const user = await userService.changeImage(userId, newFilePath);
+    console.log(user);
+    res.json({ message: 'image send!' });
+});
+
+authController.get('/:userId', async (req, res) => {
+    const { userId } = req.params;
+    try {
+        const userData = await userService.getUser(userId);
+        res.json(userData)
+    } catch (error) {
+        console.log(error.message);
+    }
 });
 
 

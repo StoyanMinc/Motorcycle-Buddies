@@ -4,13 +4,15 @@ import { useForm } from 'react-hook-form';
 
 import MotorcycleCard from '../motorcycle-card/MotorcycleCard';
 import { useGetUserMotorcycles } from '../../hooks/useMotorcycle';
-import { useChangePassword, useChangeProfileImage } from '../../hooks/useUser';
+import { useChangePassword, useChangeProfileImage, useGetUser } from '../../hooks/useUser';
 
 export default function Profile() {
 
     const [currentTab, setCurrentTap] = useState('your-motorcycles');
-    const { user } = getUser();
-    const motorcycles = useGetUserMotorcycles(user.userId);
+
+    const motorcycles = useGetUserMotorcycles();
+    const userData = useGetUser();
+    const imageUrl = `http://localhost:3000/${userData.image}`;
 
     const { changePasswordHandler, error: changePasswordError } = useChangePassword();
     const changeImageHandler = useChangeProfileImage();
@@ -53,7 +55,7 @@ export default function Profile() {
                     <span onClick={() => changeTabHandler('profile-info')}>profile info</span>
                     <span onClick={() => changeTabHandler('edit-profile')}>edit profile</span>
                     <span onClick={() => changeTabHandler('change-password')}>change password</span>
-                    <span>apperance</span>
+                    <span>something...</span>
                     <span>notification</span>
                 </div>
                 {currentTab === 'edit-profile' &&
@@ -62,7 +64,7 @@ export default function Profile() {
                         <div className="profile-header-container">
                             <div className="profile-picture-container">
                                 <span>profile picture</span>
-                                <img src="/images/profile-avatar.avif" alt="" />
+                                <img src={imageUrl} alt={userData.username} />
                             </div>
                             <div className="profile-image-settings-container">
                                 <div className="change-image-container">
