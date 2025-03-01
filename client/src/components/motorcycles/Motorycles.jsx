@@ -1,44 +1,33 @@
-import { useEffect, useState } from "react";
-// import { useGetAllMotorcycles } from "../../hooks/useMotorcycle.js"
+import { useState } from "react";
+import { useGetAllMotorcycles } from "../../hooks/useMotorcycle.js"
 import MotorcycleCard from "../motorcycle-card/MotorcycleCard.jsx";
-import { motorcyclesService } from "../../api/motorcycles-api.js";
 
 export default function Motorcycles() {
+    const motorcycles = useGetAllMotorcycles();
     const [searchingParams, setSearchingParams] = useState({ model: '', year: '' });
-    const [queryParams, setQueryParams] = useState('');
-    const [motorcycles, setMotorcycles] = useState([]);
+    const [searchedResult, setSearchedResult] = useState(null);
+
     const searchingChangeHandler = (e) => {
         const { id, value } = e.target;
         setSearchingParams((prev) => ({
             ...prev,
             [id]: value
         }))
-    }
-
-    useEffect(() => {
-
-        if (searchingParams.model !== '' || searchingParams.year !== '') {
-            const queryParams = new URLSearchParams({
-                model: searchingParams.model,
-                year: searchingParams.year
-            });
-            setQueryParams(queryParams.toString());
-        }
-
-    }, [searchingParams.model, searchingParams.year]);
-
-
-    useEffect(() => {
-        (async () => {
-            const result = await motorcyclesService.getAll();
-            setMotorcycles(result);
-        })()
-    }, []);
+    };
 
     const searchHandler = async () => {
-        const result = await motorcyclesService.getSearched(queryParams);
-        setMotorcycles(result);
+        console.log(motorcycles);
+        const { model, year } = searchingParams;
+        const searchedMotorcycles = motorcycles.filter(motorcycle => {
+            return (
+                (model === '' || motorcycle.model.toLowerCase().includes(model.toLowerCase())) &&
+                (year === '' || motorcycle.year === Number(year)) 
+            );
+        });
+        return setSearchedResult(searchedMotorcycles)
     }
+
+    const motorcyclesToDisplay = searchedResult !== null ? searchedResult : motorcycles;
 
     return (
         <div className="page-container">
@@ -49,8 +38,8 @@ export default function Motorcycles() {
                 <button className="search-button" onClick={searchHandler}>Search</button>
             </div>
             <div className="cards-wrapper">
-                {motorcycles.map(motorcycle => <MotorcycleCard key={motorcycle._id} motorcycle={motorcycle} />)}
+                {motorcyclesToDisplay.map(motorcycle => <MotorcycleCard key={motorcycle._id} motorcycle={motorcycle} />)}
             </div>
         </div>
-    )
-}
+    );
+};
