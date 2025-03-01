@@ -38,6 +38,18 @@ authController.get('/logout', (req, res) => {
     res.json({ ok: true });
 });
 
+authController.put('/:userId/update-user', async (req, res) => {
+    const { userId } = req.params;
+    const userData = req.body;
+    try {
+        const updatedUser = await userService.changeUserData(userId, userData);
+        // console.log(updatedUser);
+        res.json(updatedUser)
+    } catch (error) {
+        console.log(error.message);
+    }
+});
+
 authController.put('/change-password', async (req, res) => {
     const values = req.body;
     try {
@@ -53,9 +65,9 @@ authController.put('/change-password', async (req, res) => {
 
 authController.put('/change-image', async (req, res) => {
     const { userId, image, imageType } = req.body;
+    console.log(req.body)
     const userData = await userService.getUser(userId);
 
-    console.log(userData);
     const buffer = Buffer.from(image, 'base64');
     if (userData.image) {
 
@@ -68,7 +80,6 @@ authController.put('/change-image', async (req, res) => {
     const newFilePath = `uploadsUserImages/${Date.now()}.${imageType}`;
     fs.writeFileSync(path.join(import.meta.dirname, '../..', newFilePath), buffer);
     const user = await userService.changeImage(userId, newFilePath);
-    console.log(user);
     res.json({ message: 'image send!' });
 });
 

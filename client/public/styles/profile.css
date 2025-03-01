@@ -38,20 +38,37 @@
     display: flex;
     flex-direction: column;
     margin-left: 10%;
+    max-width: 600px;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.2)
 }
 
 .profile-picture-container img {
     width: 150px;
+    height: 150px;
+    /* Ensure the image is a perfect square */
+    object-fit: contain;
+    /* Prevent distortion and crop excess */
     border-radius: 50%;
+    /* Make it a circle */
     margin-top: 10px;
+    border: 2px solid #ddd;
+    /* Optional: Adds a subtle border */
 }
 
-.profile-container button, .profile-change-btn {
+.profile-container button,
+.profile-change-btn {
     margin-right: 10px;
     border-radius: 6px;
     border: none;
     padding: 8px 10px;
     font-weight: 700;
+}
+
+.profile-details-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 }
 
 .profile-image-settings-container {

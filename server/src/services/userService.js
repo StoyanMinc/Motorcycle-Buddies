@@ -44,7 +44,6 @@ const login = async (formData) => {
     return userData;
 };
 
-
 const getUser = async (userId) => {
     try {
         const userData = await User.findById(userId);
@@ -53,6 +52,11 @@ const getUser = async (userId) => {
         console.log(error.message);
     }
 };
+
+const changeUserData = async (userId, userData) => {
+    const updatedUser = await User.findByIdAndUpdate(userId, userData, {new: true} );
+    return updatedUser;
+}
 
 const changeImage = async (userId, image) => {
     const user = await User.findByIdAndUpdate(userId, { image: image });
@@ -70,13 +74,14 @@ const changePassword = async (values) => {
     const hashedPassword = await hash(newPassword, 12);
     await User.findByIdAndUpdate(userId, { password: hashedPassword });
     return ('Password updated successfully!');
-}
+};
 
 export const userService = {
     register,
     login,
-    changePassword,
     getUser,
+    changeUserData,
+    changePassword,
     changeImage,
 
 };

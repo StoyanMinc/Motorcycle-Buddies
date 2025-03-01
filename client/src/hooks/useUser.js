@@ -1,6 +1,6 @@
 import { getUser } from "../context/AuthContext";
 import { use, useEffect, useState } from "react";
-import { changePassword, changeProfileImage, getUseFromServer } from "../api/user-api";
+import { changePassword, changeProfileImage, changeUserData, getUserFromServer } from "../api/user-api";
 
 export function useGetUser() {
     const { user } = getUser();
@@ -9,19 +9,36 @@ export function useGetUser() {
 
     useEffect(() => {
         (async () => {
-            const result = await getUseFromServer(user.userId);
+            const result = await getUserFromServer(user.userId);
             setUserData(result);
         })();
-    },[]);
+    }, []);
 
     return userData;
+};
+
+export function useChangeUserData() {
+    const { user } = getUser();
+
+    const [error, setError] = useState(null);
+
+    const changeUserHandler = async (userData) => {
+        try {
+            const updatedUser = await changeUserData(user.userId, userData);
+            return updatedUser;
+        } catch (error) {
+            setError(error.message);
+        }
+    };
+
+    return { changeUserHandler, error };
 }
 
 export function useChangePassword() {
     const { user } = getUser();
     const [error, setError] = useState(null);
 
-    const changePasswordHandler = async (values, setCurrentTab) => {
+    const changePasswordHandler = async (values, changeTabHandler) => {
         if (values.newPassword !== values.confirmPassword) {
             return setError('Passwords don\'t match!');
         }
@@ -30,7 +47,7 @@ export function useChangePassword() {
 
         try {
             const userData = await changePassword({ userId: user.userId, oldPassword: values.oldPassword, newPassword: values.newPassword });
-            setCurrentTab('your-motorcycles')
+            changeTabHandler('your-motorcycles')
         } catch (error) {
             setError(error.message);
         }
@@ -45,7 +62,9 @@ export function useChangeProfileImage() {
 
     const changeImageHandler = async (image, imageType) => {
         try {
+
             const result = await changeProfileImage({ userId: user.userId, image, imageType });
+            console.log(result)
             return result;
         } catch (error) {
             console.log(error.message);

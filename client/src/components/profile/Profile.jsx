@@ -1,120 +1,69 @@
-import { getUser } from '../../context/AuthContext'
-import { useState } from 'react';
-import { useForm } from 'react-hook-form';
+import { useEffect, useState } from 'react';
 
 import MotorcycleCard from '../motorcycle-card/MotorcycleCard';
 import { useGetUserMotorcycles } from '../../hooks/useMotorcycle';
-import { useChangePassword, useChangeProfileImage, useGetUser } from '../../hooks/useUser';
+import ProfileCard from './ProfileCard';
+import ProfileEdit from './ProfileEdit';
+import ChangePassword from './ChangePassword';
+import { useGetUser } from '../../hooks/useUser';
+import { getUserFromServer } from '../../api/user-api';
+import { getUser } from '../../context/AuthContext';
 
 export default function Profile() {
-
-    const [currentTab, setCurrentTap] = useState('your-motorcycles');
+    const { user } = getUser();
+    const [currentTab, setCurrentTap] = useState('profile-info');
 
     const motorcycles = useGetUserMotorcycles();
-    const userData = useGetUser();
-    const imageUrl = `http://localhost:3000/${userData.image}`;
+    // const userData = useGetUser();
+    const [userData, setUserData] = useState(null);
 
-    const { changePasswordHandler, error: changePasswordError } = useChangePassword();
-    const changeImageHandler = useChangeProfileImage();
+    useEffect(() => {
+        (async () => {
+            const result = await getUserFromServer(user.userId);
+            setUserData(result);
+        })();
+    }, []);
+
+    const imageUrl = `http://localhost:3000/${userData?.image}`;
 
     const changeTabHandler = (value) => setCurrentTap(value);
 
-    const { register: registerPassword, handleSubmit: handlePasswordSubmit } = useForm({
-        defaultValues: {
-            oldPassword: '',
-            newPassword: '',
-            confirmPassword: ''
-        }
-    });
-
-    const handleImageChange = (e) => {
-        const image = e.target.files[0];
-        let image_split = image.name.split(".");
-        let image_type = image_split[image_split.length - 1];
-        if (image) {
-            const reader = new FileReader();
-            reader.readAsDataURL(image); // Convert file to Base64
-            reader.onload = async () => {
-                const base64File = reader.result.split(",")[1];
-                try {
-                    const result = await changeImageHandler(base64File, image_type);
-                    console.log(result);
-                } catch (error) {
-                    console.log(error.message);
-                }
-            };
-        }
+    const updateUserState = (updatedUser) => {
+        setUserData((prevState) => ({
+            ...prevState,
+            ...updatedUser
+        }))
     };
+
+    
 
     return (
         <div className="page-container">
 
             <div className="profile-container">
                 <div className="profile-side-panel">
-                    <span onClick={() => changeTabHandler('your-motorcycles')}>your motorcycles</span>
                     <span onClick={() => changeTabHandler('profile-info')}>profile info</span>
+                    <span onClick={() => changeTabHandler('your-motorcycles')}>your motorcycles</span>
                     <span onClick={() => changeTabHandler('edit-profile')}>edit profile</span>
                     <span onClick={() => changeTabHandler('change-password')}>change password</span>
-                    <span>something...</span>
-                    <span>notification</span>
                 </div>
+
+                {currentTab === 'profile-info' && userData !== null && <ProfileCard user={userData} imageUrl={imageUrl} />}
                 {currentTab === 'edit-profile' &&
-                    <div className="profile-info-container">
+                    <ProfileEdit
+                        user={userData}
+                        imageUrl={imageUrl}
+                        changeTab={changeTabHandler}
+                        updateUser={updateUserState}
+                    />
+                }
 
-                        <div className="profile-header-container">
-                            <div className="profile-picture-container">
-                                <span>profile picture</span>
-                                <img src={imageUrl} alt={userData.username} />
-                            </div>
-                            <div className="profile-image-settings-container">
-                                <div className="change-image-container">
-                                    <label className="profile-change-btn" htmlFor='profileImage'>Change picture</label>
-                                    <input type="file" name='profileImage' id='profileImage' onChange={handleImageChange} />
-                                </div>
-                                <button className="profile-delete-btn">Delete picture</button>
-                            </div>
-                        </div>
-
-                        <div className="form-container">
-                            <form action="POST">
-                                <div className="form-input-container">
-                                    <label htmlFor="username">Username</label>
-                                    <input type="text" name="username" id="username" />
-                                </div>
-                                <div className="form-input-container">
-                                    <label htmlFor="aboutme">About Me</label>
-                                    <textarea name="aboutme" id="aboutme"></textarea>
-                                </div>
-                                <button className="profile-save-btn">Save changes</button>
-                            </form>
-                        </div>
-                    </div>}
                 {currentTab === 'your-motorcycles' &&
                     <div className="cards-wrapper">
                         {motorcycles.map(motorcycle => <MotorcycleCard key={motorcycle._id} motorcycle={motorcycle} />)}
                     </div>
                 }
-
-                {currentTab === 'change-password' &&
-                    <div className="form-container">
-                        <form action="POST" onSubmit={handlePasswordSubmit((values) => changePasswordHandler(values, setCurrentTap))}>
-                            <div className="form-input-container">
-                                <label htmlFor="password">Old Password</label>
-                                <input type="password" name="password" id="password" {...registerPassword('oldPassword')} />
-                            </div>
-                            <div className="form-input-container">
-                                <label htmlFor="newPassword">New Password</label>
-                                <input type='password' name="newPassword" id="newPassword" {...registerPassword('newPassword')}></input>
-                            </div>
-                            <div className="form-input-container">
-                                <label htmlFor="confirmPassword">Confirm Password</label>
-                                <input type='password' name="confirmPassword" id="confirmPassword" {...registerPassword('confirmPassword')}></input>
-                            </div>
-                            {changePasswordError && <p className='error'>{changePasswordError}</p>}
-                            <button className="profile-save-btn">Change password</button>
-                        </form>
-                    </div>
-                }
+                {currentTab === 'change-password' && <ChangePassword changeTab={changeTabHandler} />}
             </div>
         </div>
     )

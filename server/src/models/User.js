@@ -12,6 +12,18 @@ const userSchema = new Schema({
     },
     image: {
         type: String
+    },
+    phoneNumber: {
+        type: Number
+    },
+    email: {
+        type: String
+    },
+    facebook: {
+        type: String
+    },
+    dateOfBirth: {
+        type: String
     }
 });
 
@@ -22,4 +34,3 @@ userSchema.pre('save', async function () {
 const User = model('User', userSchema);
 
 export default User;
-

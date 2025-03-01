@@ -16,7 +16,6 @@ export default function Motorcycles() {
     };
 
     const searchHandler = async () => {
-        console.log(motorcycles);
         const { model, year } = searchingParams;
         const searchedMotorcycles = motorcycles.filter(motorcycle => {
             return (
