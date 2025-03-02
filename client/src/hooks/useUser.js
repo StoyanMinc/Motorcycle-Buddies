@@ -64,7 +64,6 @@ export function useChangeProfileImage() {
         try {
 
             const result = await changeProfileImage({ userId: user.userId, image, imageType });
-            console.log(result)
             return result;
         } catch (error) {
             console.log(error.message);

@@ -59,7 +59,7 @@ const changeUserData = async (userId, userData) => {
 }
 
 const changeImage = async (userId, image) => {
-    const user = await User.findByIdAndUpdate(userId, { image: image });
+    const user = await User.findByIdAndUpdate(userId, { image: image }, {new: true});
     return user;
 }
 

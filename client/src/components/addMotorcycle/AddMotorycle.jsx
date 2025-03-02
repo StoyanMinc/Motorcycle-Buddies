@@ -55,17 +55,14 @@ export default function AddMotorcycle() {
                         <label htmlFor="soldYear">Year on Sold:</label>
                         <input type="number" id="soldYear" name="soldYear" {...register('soldYear')} autoComplete="off" />
                     </div>
-
-                    <div className="image-container">
-                        <input className="image-input" type="file" name='image' id='image' onChange={handleImageChange}/>
-                        <label htmlFor="image" className='image-label'>Избери снимка</label>
-                    </div>
-
                     <div>
                         <label htmlFor="description">Description:</label>
                         <textarea id="description" name="description" required {...register('description')}></textarea>
                     </div>
-
+                    <div className="image-container">
+                        <input className="image-input" type="file" name='image' id='image' onChange={handleImageChange}/>
+                        <label htmlFor="image" className='image-label'>Избери снимка</label>
+                    </div>
                     <button type="submit">Submit</button>
                 </form>
             </div>

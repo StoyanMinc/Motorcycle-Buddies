@@ -24,8 +24,6 @@
 }
 
 .motorcycle-card {
-    border-radius: 10px;
-    overflow: hidden;
     max-width: 200px;
     width: 100%;
 }
@@ -34,6 +32,7 @@
     width: 100%;
     height: 120px;
     object-fit: cover; /* Ensures image fits properly */
+    border-radius: 5%;
 }
 
 .motorcycle-info {

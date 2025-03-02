@@ -3,7 +3,6 @@ import { useChangeProfileImage, useChangeUserData } from "../../hooks/useUser";
 
 export default function ProfileEdit({
     user,
-    imageUrl,
     changeTab,
     updateUser
 }) {
@@ -22,6 +21,7 @@ export default function ProfileEdit({
                 const base64File = reader.result.split(",")[1];
                 try {
                     const result = await changeImageHandler(base64File, image_type);
+                    updateUser(result);
                     changeTab('profile-info');
                 } catch (error) {
                     console.log(error.message);
@@ -55,7 +55,7 @@ export default function ProfileEdit({
             <div className="profile-header-container">
                 <div className="profile-picture-container">
                     <span>profile picture</span>
-                    <img src={imageUrl} alt={user.username} />
+                    <img src={user.image !== undefined ? `http://localhost:3000/${user.image}` : 'images/profile-avatar.avif'} alt={user.username} />
                 </div>
                 <div className="profile-image-settings-container">
                     <div className="change-image-container">

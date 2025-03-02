@@ -1,12 +1,13 @@
 import { Link } from "react-router-dom";
 
 export default function ProfileCard({ user }) {
+    console.log(user.image);
     return (
         <div className="profile-info-container">
             <div className="profile-header-container">
                 <div className="profile-picture-container">
                     <span>Profile Picture</span>
-                    <img src={`http://localhost:3000/${user.image}`} alt={user.username} />
+                    <img src={user.image !== undefined ? `http://localhost:3000/${user.image}` : 'images/profile-avatar.avif'} alt={user.username} />
                 </div>
             </div>
 
