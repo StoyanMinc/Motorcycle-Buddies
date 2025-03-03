@@ -3,6 +3,7 @@
     padding: 0;
     box-sizing: border-box;
     font-family: 'Montserrat';
+
 }
 
 .site-container {
@@ -11,8 +12,11 @@
     min-height: 100vh;
     flex-direction: column;
     background-image: url('../images/sitebackground.jpg');
+    /* background-color: rgba(0, 0, 0, 0.5); */
+
     background-size: cover;
     overflow: auto;
+
 }
 
 .site-container main {
@@ -28,12 +32,21 @@
     align-items: center;
     text-align: center;
     padding: 50px;
-    min-height: 100vh;
-    background-color: rgba(0, 0, 0, 0.5);
+    /* min-height: 100vh; */
     color: #d3d3d3;
     overflow: auto;
 }
 
 .error {
     color: red;
+}
+
+.footer {
+    color: white;
+    background-color: rgba(0, 0, 0, 0.2);
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
 }

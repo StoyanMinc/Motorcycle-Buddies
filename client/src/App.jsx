@@ -12,6 +12,7 @@ import Register from "./components/register/Register"
 import Logout from "./components/logout/Logout"
 import MotorcycleDetails from "./components/motorcycle-details/MotorcycleDetails"
 import EditMotorcycle from "./components/edit-motorcycle/EditMotorcycle"
+import Footer from "./components/footer/Footer"
 
 function App() {
 
@@ -35,6 +36,7 @@ function App() {
                     </Routes>
                 </main>
 
+                <Footer />
             </div>
         </UserProvider>
     )
