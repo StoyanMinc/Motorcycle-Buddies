@@ -78,7 +78,21 @@ export function useGetUserMotorcycles () {
             const result = await motorcyclesService.getUserMotorcycles(user.userId);
             setMotorcycles(result);
         })();
-    },[])
+    },[]);
 
     return motorycles;
+}
+
+export function useGetOwnerMotorcycles(ownerId) {
+
+    const [motorcycles, setMotorcycles] = useState([]);
+
+    useEffect(() => {
+        (async () => {
+            const result = await motorcyclesService.getUserMotorcycles(ownerId);
+            setMotorcycles(result);
+        })();
+    },[]);
+
+    return motorcycles;
 }

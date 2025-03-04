@@ -37,6 +37,8 @@
 .profile-info-container {
     display: flex;
     flex-direction: column;
+    align-items: center;
+    justify-content: center;
     margin-left: 10%;
     max-width: 600px;
     width: 100%;
@@ -108,4 +110,9 @@
 .profile-picture-container {
     display: flex;
     flex-direction: column;
+}
+
+.facebook-link {
+    text-decoration: none;
+    color: white;
 }

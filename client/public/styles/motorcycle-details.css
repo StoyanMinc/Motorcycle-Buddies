@@ -68,7 +68,11 @@
     background-color: #0056b3;
 }
 
-
+.owner-link {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+}
 .options-buttons {
     display: flex;
     justify-content: center;

@@ -5,13 +5,11 @@
         background-size: cover;
         background-position: center;
         font-size: 12px;
-        background-color: rgba(0, 0, 0, 0.5);
-
     }
 
     .toggle-icon {
         display: block;
-        position: absolute;
+        position: fixed;
         right: 10px;
         top: 20px;
         border: 1px solid white;
@@ -21,30 +19,28 @@
     }
 
     .nav-container {
-        position: absolute;
-        top: -100%;
+        position: fixed;
+        top: -1000px;
         width: 100%;
-        height: auto;
-        background: rgba(0, 0, 0, 0.9);
+        height: 100vh;
+        background: black;
         transition: top 0.6s ease-in-out;
         display: flex;
         justify-content: center;
         align-items: center;
+        padding: 10px 0;
     }
 
     .nav-container ul {
         flex-direction: column;
-        gap: 10px;
-        font-size: 20px;
+        gap: 45px;
+        font-size: 30px;
     }
 
     .nav-show {
-       top: 0;
+        top: 0;
     }
 
-    main {
-        background: rgba(0, 0, 0, 0.6);
-    }
 
     .page-container {
         padding: 20px;
@@ -60,13 +56,8 @@
         height: 60px;
     }
 
-    .nav-container {
-        margin-bottom: 10px;
-    }
-
     .home-cards-wrapper {
         flex-direction: column;
-
     }
 
     .cards-wrapper {
@@ -76,6 +67,7 @@
         gap: 20px;
         scroll-behavior: smooth;
         scrollbar-width: none;
+        margin-top: 20px;
     }
 
     .search-bar-container {
@@ -99,7 +91,7 @@
 
     .view-details-btn {
         margin: 0;
-        padding: 0;
+        padding: 2px 4px;
         font-size: 10px;
     }
 
@@ -113,6 +105,12 @@
         margin-bottom: 20px;
     }
 
+    .profile-side-panel span:hover {
+        background-color: inherit;
+        transform: translateY(-2px);
+    }
+
+
     .profile-info-container {
         margin: 0;
     }
@@ -124,7 +122,6 @@
 
     .footer {
         background-color: rgba(0, 0, 0, 0.8);
-
     }
 }
 

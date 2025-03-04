@@ -1,10 +1,11 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation, useParams } from "react-router-dom";
 import { getUser } from "../../context/AuthContext";
 import { useState } from "react";
 
 export default function Header() {
 
     const [showNav, setShowNav] = useState(false);
+    const location = useLocation().pathname.split('/').at(1);
 
     const toggleNav = () => {
         setShowNav(state => !state);
@@ -17,12 +18,12 @@ export default function Header() {
             <div className={showNav ? 'nav-container nav-show' : 'nav-container'}>
                 <nav>
                     <ul>
-                        <li><Link to={'/'} onClick={toggleNav}>Home</Link></li>
-                        <li><Link to={'/motorcycles'} onClick={toggleNav}>Motorcycles</Link></li>
+                        <li><Link className={location === '' ? 'link-active' : ''} to={'/'} onClick={toggleNav}>Home</Link></li>
+                        <li><Link className={location === 'motorcycles' ? 'link-active' : ''} to={'/motorcycles'} onClick={toggleNav}>Motorcycles</Link></li>
                         {user
                             ? <>
-                                <li><Link to={'/motorcycles/post'} onClick={toggleNav}>Add Motorcycle</Link></li>
-                                <li><Link to={'/profile'} onClick={toggleNav}>Profile</Link></li>
+                                <li><Link className={location === 'post-motorcycle' ? 'link-active' : ''} to={'/post-motorcycle'} onClick={toggleNav}>Add Motorcycle</Link></li>
+                                <li><Link className={location === 'profile' ? 'link-active' : ''} to={'/profile'} onClick={toggleNav}>My Profile</Link></li>
                                 <li><Link to={'/logout'} onClick={toggleNav}>Logout</Link></li>
                             </>
                             : <>

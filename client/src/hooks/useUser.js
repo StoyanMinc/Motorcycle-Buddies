@@ -1,8 +1,9 @@
 import { getUser } from "../context/AuthContext";
-import { use, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { changePassword, changeProfileImage, changeUserData, getUserFromServer } from "../api/user-api";
 
 export function useGetUser() {
+
     const { user } = getUser();
 
     const [userData, setUserData] = useState({});
@@ -16,6 +17,19 @@ export function useGetUser() {
 
     return userData;
 };
+
+export function useGetOwner(ownerId) {
+    const [userData, setUserData] = useState({});
+
+    useEffect(() => {
+        (async () => {
+            const result = await getUserFromServer(ownerId);
+            setUserData(result);
+        })();
+    },[]);
+
+    return userData;
+}
 
 export function useChangeUserData() {
     const { user } = getUser();

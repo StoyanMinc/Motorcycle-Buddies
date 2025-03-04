@@ -1,4 +1,4 @@
-import { useParams, useNavigate } from "react-router-dom"
+import { useParams, useNavigate, Link } from "react-router-dom"
 
 import { useGetOneMotorcycle } from "../../hooks/useMotorcycle.js";
 import { getUser } from "../../context/AuthContext.jsx";
@@ -16,7 +16,7 @@ export default function MotorcycleDetails() {
 
     const motorcycle = useGetOneMotorcycle(motorcycleId);
 
-    const imageUrl = `http://localhost:3000/${motorcycle.image}`;
+    const imageUrl = `http://192.168.1.75:3000/${motorcycle.image}`;
 
     const { user } = getUser();
 
@@ -69,7 +69,7 @@ export default function MotorcycleDetails() {
                 />
                 <div className="motorcycle-info">
                     <h2 className="motorcycle-model">{motorcycle.model}</h2>
-                    <p>Owner: <strong>{motorcycle.owner?.username}</strong></p>
+                    <p>Owner: <Link className="owner-link" to={`/user/${motorcycle.owner?._id}`}>{motorcycle.owner?.username}</Link></p>
                     <p>Year:<strong>{motorcycle.year}</strong> </p>
                     <p>Buy Year: <strong>{motorcycle.buyYear}</strong> </p>
                     <p>Sold Year: <strong>{motorcycle.soldYear || 'Still Owned'}</strong></p>

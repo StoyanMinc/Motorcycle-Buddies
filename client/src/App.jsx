@@ -13,6 +13,7 @@ import Logout from "./components/logout/Logout"
 import MotorcycleDetails from "./components/motorcycle-details/MotorcycleDetails"
 import EditMotorcycle from "./components/edit-motorcycle/EditMotorcycle"
 import Footer from "./components/footer/Footer"
+import UserCard from "./components/users/UserCard"
 
 function App() {
 
@@ -26,13 +27,14 @@ function App() {
                     <Routes>
                         <Route path="/" element={<Home />} />
                         <Route path="/motorcycles" element={<Motorcycles />} />
-                        <Route path="/motorcycles/post" element={<AddMotorcycle />} />
+                        <Route path="/post-motorcycle" element={<AddMotorcycle />} />
                         <Route path="/motorcycles/:motorcycleId/edit" element={<EditMotorcycle />} />
                         <Route path="/profile" element={<Profile />} />
                         <Route path="/login" element={<Login />} />
                         <Route path="/register" element={<Register />} />
                         <Route path="/logout" element={<Logout />} />
                         <Route path="/motorcycles/:motorcycleId" element={<MotorcycleDetails />} />
+                        <Route path="/user/:userId" element={<UserCard />} />
                     </Routes>
                 </main>
 

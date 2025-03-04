@@ -1,5 +1,5 @@
 import { get, put } from "./requester";
-const BASE_URL = 'http://localhost:3000/auth';
+const BASE_URL = 'http://192.168.1.75:3000/auth';
 
 export const getUserFromServer = (userId) => get(`${BASE_URL}/${userId}`);
 

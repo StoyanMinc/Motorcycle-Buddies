@@ -55,7 +55,7 @@ export default function ProfileEdit({
             <div className="profile-header-container">
                 <div className="profile-picture-container">
                     <span>profile picture</span>
-                    <img src={user.image !== undefined ? `http://localhost:3000/${user.image}` : 'images/profile-avatar.avif'} alt={user.username} />
+                    <img src={user.image !== undefined ? `http://192.168.1.75:3000/${user.image}` : 'images/profile-avatar.avif'} alt={user.username} />
                 </div>
                 <div className="profile-image-settings-container">
                     <div className="change-image-container">
