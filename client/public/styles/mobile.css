@@ -16,8 +16,14 @@
         border-radius: 10px;
         padding: 3px 10px;
         font-size: 9px;
+        font-weight: bold;
     }
 
+    .toggle-active {
+        background-color: white;
+        color: black;
+    }
+    
     .nav-container {
         position: fixed;
         top: -1000px;
@@ -66,8 +72,12 @@
         align-items: center;
         gap: 20px;
         scroll-behavior: smooth;
-        scrollbar-width: none;
+        -ms-overflow-style: none; /* IE & Edge */
         margin-top: 20px;
+    }
+
+    .cards-wrapper::-webkit-scrollbar {
+        display: none;
     }
 
     .search-bar-container {

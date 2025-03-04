@@ -34,7 +34,7 @@ export default function Header() {
                     </ul>
                 </nav>
             </div>
-            <div className="toggle-icon" onClick={toggleNav}>menu</div>
+            <div className={`toggle-icon ${showNav ? 'toggle-active' : ''}` }onClick={toggleNav}>menu</div>
         </div>
     )
 }

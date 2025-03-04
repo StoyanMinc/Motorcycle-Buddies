@@ -5,6 +5,13 @@ import { generateToken } from '../utils/tokenUtil.js';
 const register = async (formData) => {
     const { username, password } = formData;
 
+    if(username.length < 4) {
+        throw new Error("Username must be at least 4 characters long!");
+    }
+    if(password.length < 6) {
+        throw new Error("Password must be at least 6 characters long!");
+    };
+
     const existingUser = await User.findOne({ username });
     if (existingUser) {
         throw new Error("Username already exist!");

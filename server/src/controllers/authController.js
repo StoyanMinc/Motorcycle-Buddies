@@ -14,7 +14,11 @@ authController.post('/register', async (req, res) => {
 
     } catch (error) {
         if (error.message === 'Username already exist!') {
-            return res.status(409).json({ message: error.message });
+            return res.status(401).json({ message: error.message });
+        } else if(error.message === 'Password must be at least 6 characters long!') {
+            return res.status(400).json({message: error.message});
+        } else if(error.message === 'Username must be at least 4 characters long!') {
+            return res.status(400).json({message: error.message});
         }
         res.status(500).res.json({ message: 'Internal server error' });
     }
