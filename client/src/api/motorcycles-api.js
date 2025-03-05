@@ -1,6 +1,6 @@
 import { del, get, post, put } from "./requester.js";
 
-const BASE_URL = 'http://192.168.1.75:3000/motorcycles';
+const BASE_URL = 'http://localhost:3000/motorcycles';
 
 const create = (values) => post(BASE_URL, values);
 

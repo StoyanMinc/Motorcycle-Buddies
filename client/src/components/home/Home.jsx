@@ -2,7 +2,6 @@ import { getLastMotorcycles } from "../../hooks/useMotorcycle"
 import MotorcycleCard from "../motorcycle-card/MotorcycleCard"
 
 export default function Home() {
-
     const lastMotorcycles = getLastMotorcycles();
     return (
         <div className="page-container">
