@@ -61,7 +61,7 @@ export default function AddMotorcycle() {
                     </div>
                     <div className="image-container">
                         <input className="image-input" type="file" name='image' id='image' onChange={handleImageChange}/>
-                        <label htmlFor="image" className='image-label'>Избери снимка</label>
+                        <label htmlFor="image" className='image-label' >Избери снимка</label>
                     </div>
                     <button type="submit">Submit</button>
                 </form>

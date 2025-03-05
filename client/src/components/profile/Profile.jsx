@@ -38,7 +38,7 @@ export default function Profile() {
             <div className="profile-container">
                 <div className="profile-side-panel">
                     <span className={currentTab === 'profile-info' ? 'link-active' : ''} onClick={() => changeTabHandler('profile-info')}>profile info</span>
-                    <span className={currentTab === 'your-motorcycles' ? 'link-active' : ''} onClick={() => changeTabHandler('your-motorcycles')}>your motorcycles</span>
+                    <span className={currentTab === 'your-motorcycles' ? 'link-active' : ''} onClick={() => changeTabHandler('your-motorcycles')}>my motorcycles</span>
                     <span className={currentTab === 'edit-profile' ? 'link-active' : ''} onClick={() => changeTabHandler('edit-profile')}>edit profile</span>
                     <span className={currentTab === 'change-password' ? 'link-active' : ''} onClick={() => changeTabHandler('change-password')}>change password</span>
                 </div>

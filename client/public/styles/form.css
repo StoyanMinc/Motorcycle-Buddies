@@ -16,10 +16,10 @@
 
 .form-container label {
     margin-top: 20px;
-
     font-size: 1em;
     margin-bottom: 8px;
     display: block;
+    font-weight: bold;
 }
 
 .form-container input,
@@ -84,7 +84,7 @@ input:focus, textarea:focus {
     width: 120px;
     height: 40px;
     cursor: pointer;
-    background-color: #007BFF;
+    background-color: #f83f3f;
     color: white;
     border-radius: 8px;
     font-size: 1em;

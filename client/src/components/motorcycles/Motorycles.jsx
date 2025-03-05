@@ -4,7 +4,7 @@ import MotorcycleCard from "../motorcycle-card/MotorcycleCard.jsx";
 
 export default function Motorcycles() {
     const motorcycles = useGetAllMotorcycles();
-    const [searchingParams, setSearchingParams] = useState({ model: '', year: '' });
+    const [searchingParams, setSearchingParams] = useState({ model: '', owner: '' });
     const [searchedResult, setSearchedResult] = useState(null);
 
     const searchingChangeHandler = (e) => {
@@ -16,11 +16,11 @@ export default function Motorcycles() {
     };
 
     const searchHandler = async () => {
-        const { model, year } = searchingParams;
+        const { model, owner } = searchingParams;
         const searchedMotorcycles = motorcycles.filter(motorcycle => {
             return (
                 (model === '' || motorcycle.model.toLowerCase().includes(model.toLowerCase())) &&
-                (year === '' || motorcycle.year === Number(year)) 
+                (owner === '' || motorcycle.owner.username.toLowerCase() === owner.toLocaleLowerCase()) 
             );
         });
         return setSearchedResult(searchedMotorcycles)
@@ -33,7 +33,7 @@ export default function Motorcycles() {
             <h1>Motorcycles</h1>
             <div className="search-bar-container">
                 <input type="text" className="search-input" id="model" placeholder="Search by model..." value={searchingParams.model} onChange={searchingChangeHandler} />
-                <input type="number" className="search-input" id="year" placeholder="Search by year..." value={searchingParams.year} onChange={searchingChangeHandler} />
+                <input type="text" className="search-input" id="owner" placeholder="Search by owner..." value={searchingParams.owner} onChange={searchingChangeHandler} />
                 <button className="search-button" onClick={searchHandler}>Search</button>
             </div>
             <div className="cards-wrapper">

@@ -1,6 +1,6 @@
 import Motorcycle from "../models/Motorcycle.js";
 
-const getAll = () => Motorcycle.find({})
+const getAll = () => Motorcycle.find({}).populate('owner', 'username');
 
 const getLasts = () => Motorcycle.find().sort({ createdAt: -1 }).limit(3).populate('owner', 'username');
 

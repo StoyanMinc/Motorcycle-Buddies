@@ -20,6 +20,7 @@
     overflow-y: auto; /* Enable vertical scrolling */
     max-height: 600px; /* Set max height to allow scrolling */
     scroll-behavior: smooth; /* Smooth scrolling */
+    margin-top: 20px;
   }
 
 .search-bar-container {

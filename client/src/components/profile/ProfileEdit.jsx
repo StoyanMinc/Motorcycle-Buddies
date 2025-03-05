@@ -62,7 +62,7 @@ export default function ProfileEdit({
                         <label className="profile-change-btn" htmlFor='profileImage'>Change picture</label>
                         <input type="file" name='profileImage' id='profileImage' onChange={handleImageChange} />
                     </div>
-                    <button className="profile-delete-btn">Delete picture</button>
+                    {/* <button className="profile-delete-btn">Delete picture</button> */}
                 </div>
             </div>
 
