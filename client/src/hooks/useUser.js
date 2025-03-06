@@ -53,6 +53,10 @@ export function useChangePassword() {
     const [error, setError] = useState(null);
 
     const changePasswordHandler = async (values, changeTabHandler) => {
+
+        if(values.newPassword.length < 6) {
+            return setError('Password must be at least 6 characters');
+        }
         if (values.newPassword !== values.confirmPassword) {
             return setError('Passwords don\'t match!');
         }

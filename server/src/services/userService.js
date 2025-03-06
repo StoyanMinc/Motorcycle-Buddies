@@ -72,6 +72,11 @@ const changeImage = async (userId, image) => {
 
 const changePassword = async (values) => {
     const { userId, oldPassword, newPassword } = values;
+    
+    if(newPassword.length < 6) {
+        throw new Error("Password must be at least 6 characters!");
+    }
+
     const result = await User.findById(userId);
     const isValid = await compare(oldPassword, result.password);
     if (!isValid) {
