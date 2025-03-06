@@ -8,8 +8,6 @@ export default function UserCard() {
     const { userId } = useParams();
     const user = useGetOwner(userId);
     const userMotorcycles = useGetOwnerMotorcycles(userId);
-    console.log(userMotorcycles);
-    console.log(user);
     return (
         <div className="page-container">
             <ProfileCard user={user} />

@@ -55,7 +55,7 @@ export default function ProfileEdit({
             <div className="profile-header-container">
                 <div className="profile-picture-container">
                     <span>profile picture</span>
-                    <img src={user.image !== undefined ? `http://localhost:3000/${user.image}` : 'images/profile-avatar.avif'} alt={user.username} />
+                    <img src={user.image !== undefined ? `http://motorcycle-buddies.live:3000/${user.image}` : 'images/profile-avatar.avif'} alt={user.username} />
                 </div>
                 <div className="profile-image-settings-container">
                     <div className="change-image-container">
@@ -82,7 +82,7 @@ export default function ProfileEdit({
                     </div>
                     <div className="form-input-container">
                         <label htmlFor="phoneNumber">Phone Number</label>
-                        <input type='number' name="phoneNumber" id="phoneNumber" {...registerProfile('phoneNumber')} ></input>
+                        <input type='text' name="phoneNumber" id="phoneNumber" {...registerProfile('phoneNumber')} ></input>
                     </div>
                     {error && <p className='error'>{error}</p>}
                     <button className="profile-save-btn">Save changes</button>
