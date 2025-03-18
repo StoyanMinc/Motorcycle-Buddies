@@ -46,7 +46,8 @@ const getSearched = (model, year) => {
     return Motorcycle.find(query);
 }
 
-const getUserMotorcycles = (userId) => Motorcycle.find({owner: userId});
+const getUserMotorcycles = (userId) => Motorcycle.find({owner: userId}).populate('owner', 'username');
+
 export const motorcycleService = {
     getAll,
     getLasts,

@@ -37,7 +37,7 @@ motorcycleController.post('/', async (req, res) => {
     const motorcycleData = req.body;
     const buffer = Buffer.from(motorcycleData.image, "base64");
     let filePath = `uploadsImages/${Date.now()}.${motorcycleData.imageType}`; // Adjust extension as needed
-    fs.writeFileSync(path.join(import.meta.dirname, "../..", filePath), buffer);
+    fs.writeFileSync(path.join(import.meta.dirname, "../", filePath), buffer);
     motorcycleData.image = filePath;
     const motorcycle = await motorcycleService.create(motorcycleData);
     res.json(motorcycle);
@@ -52,14 +52,14 @@ motorcycleController.put('/:motorcycleId/edit', async (req, res) => {
         const buffer = Buffer.from(motorcycleData.image, 'base64');
         if (oldMotorcycleData.image !== '') {
 
-            const oldImagePath = path.join(import.meta.dirname, '../..', oldMotorcycleData.image);
+            const oldImagePath = path.join(import.meta.dirname, '../', oldMotorcycleData.image);
             if (fs.existsSync(oldImagePath)) {
                 fs.unlinkSync(oldImagePath);
             }
         }
 
         let newFilePath = `uploadsImages/${Date.now()}.${motorcycleData.imageType}`; // Adjust extension as needed
-        fs.writeFileSync(path.join(import.meta.dirname, '../..', newFilePath), buffer);
+        fs.writeFileSync(path.join(import.meta.dirname, '../', newFilePath), buffer);
         motorcycleData.image = newFilePath;
     } else {
         motorcycleData.image = oldMotorcycleData.image;

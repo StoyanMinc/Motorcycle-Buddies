@@ -75,14 +75,14 @@ authController.put('/change-image', async (req, res) => {
     const buffer = Buffer.from(image, 'base64');
     if (userData.image) {
 
-        const oldImagePath = path.join(import.meta.dirname, '../..', userData.image);
+        const oldImagePath = path.join(import.meta.dirname, '../', userData.image);
         if (fs.existsSync(oldImagePath)) {
             fs.unlinkSync(oldImagePath);
         }
     }
 
     const newFilePath = `uploadsUserImages/${Date.now()}.${imageType}`;
-    fs.writeFileSync(path.join(import.meta.dirname, '../..', newFilePath), buffer);
+    fs.writeFileSync(path.join(import.meta.dirname, '../', newFilePath), buffer);
     const user = await userService.changeImage(userId, newFilePath);
     res.json(user);
 });

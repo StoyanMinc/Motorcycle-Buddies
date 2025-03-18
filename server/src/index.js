@@ -1,10 +1,12 @@
-import express, { json } from 'express';
+import express from 'express';
 import mongoose from 'mongoose';
 import cors from 'cors';
 
 import router from './router.js';
 import bodyParser from 'body-parser';
 import path from 'path';
+import https from 'https';
+import fs from 'fs';
 
 
 const app = express();
@@ -16,8 +18,8 @@ try {
     console.log(error.message);
 }
 
-const uploadDir = path.join(import.meta.dirname, '../uploadsImages');
-const uploadUserDir = path.join(import.meta.dirname, '../uploadsUserImages');
+const uploadDir = path.join(import.meta.dirname, '../../uploadsImages');
+const uploadUserDir = path.join(import.meta.dirname, '../../uploadsUserImages');
 app.use('/uploadsImages', express.static(uploadDir));
 app.use('/uploadsUserImages', express.static(uploadUserDir));
 
@@ -29,6 +31,14 @@ app.use(router);
 app.get('/', (req, res) => {
     res.send('hello')
 })
-app.listen(3000, () => console.log('Server is listening on http://localhost:3000...'));
 
-
+app.get("/uploadsImages/*", (req, res) => {
+    res.sendFile(path.join(import.meta.dirname, req.path));
+})
+app.get("/uploadsUserImages/*", (req, res) => {
+    res.sendFile(path.join(import.meta.dirname, req.path));
+})
+https.createServer({
+    cert: fs.readFileSync("/etc/letsencrypt/live/motorcycle-buddies.live/cert.pem"),
+    key: fs.readFileSync("/etc/letsencrypt/live/motorcycle-buddies.live/privkey.pem")
+}, app).listen(3000, () => console.log('Server is listening on https://localhost:3000...'));
