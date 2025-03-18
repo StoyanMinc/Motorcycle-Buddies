@@ -18,7 +18,7 @@ export default function MotorcycleDetails() {
 
     const motorcycle = useGetOneMotorcycle(motorcycleId);
 
-    const imageUrl = `http://motorcycle-buddies.live:3000/${motorcycle.image}`;
+    const imageUrl = `https://motorcycle-buddies.live:3000/${motorcycle.image}`;
 
     const { user } = getUser();
 
