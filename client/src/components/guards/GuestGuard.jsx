@@ -1,4 +1,4 @@
-import { Navigate } from "react-router-dom";
+import { Navigate, Outlet } from "react-router-dom";
 import { getUser } from "../../context/AuthContext";
 
 export default function GuestGuard() {
