@@ -1,15 +1,19 @@
 import { useForm } from "react-hook-form"
 import { useEditMotorcycle, useGetOneMotorcycle } from "../../hooks/useMotorcycle";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useEffect } from "react";
+import { getUser } from "../../context/AuthContext";
+
 
 export default function EditMotorcycle() {
 
-    const {motorcycleId} = useParams();
+    const navigate = useNavigate();
+    const { motorcycleId } = useParams();
+    const { user } = getUser();
 
     const motorcycle = useGetOneMotorcycle(motorcycleId);
 
-    const {register, handleSubmit, setValue } = useForm({
+    const { register, handleSubmit, setValue } = useForm({
         defaultValues: {
             model: '',
             year: '',
@@ -23,6 +27,10 @@ export default function EditMotorcycle() {
 
     useEffect(() => {
         if (motorcycle) {
+            if(motorcycle.owner && motorcycle.owner._id !== user.userId) {
+                navigate('/');
+            }
+
             setValue('model', motorcycle.model || '');
             setValue('year', motorcycle.year || '');
             setValue('buyYear', motorcycle.buyYear || '');
@@ -31,7 +39,7 @@ export default function EditMotorcycle() {
             setValue('imageType', motorcycle.imageType || '');
         }
     }, [motorcycle, setValue]);
-    
+
     const handleImageChange = (e) => {
         const image = e.target.files[0];
         let image_split = image.name.split(".");
@@ -48,7 +56,7 @@ export default function EditMotorcycle() {
     };
 
     const submitHandler = useEditMotorcycle();
-    
+
     return (
         <div className="page-container">
             <div className="form-container">

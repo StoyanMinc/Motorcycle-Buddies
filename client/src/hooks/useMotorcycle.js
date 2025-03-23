@@ -57,18 +57,17 @@ export function getLastMotorcycles() {
 };
 
 export function useEditMotorcycle() {
-
-    const { user } = getUser();
     const navigate = useNavigate();
+
     const editHandler = async (motorcycleId, values) => {
-        values.owner = user.userId
-        const result = await motorcyclesService.editMotorcycle(motorcycleId, values);
+        await motorcyclesService.editMotorcycle(motorcycleId, values);
         navigate('/motorcycles');
+        console.log(values)
     };
     return editHandler;
 };
 
-export function useGetUserMotorcycles () {
+export function useGetUserMotorcycles() {
     const { user } = getUser();
 
     const [motorycles, setMotorcycles] = useState([]);
@@ -78,7 +77,7 @@ export function useGetUserMotorcycles () {
             const result = await motorcyclesService.getUserMotorcycles(user.userId);
             setMotorcycles(result);
         })();
-    },[]);
+    }, []);
 
     return motorycles;
 }
@@ -92,7 +91,7 @@ export function useGetOwnerMotorcycles(ownerId) {
             const result = await motorcyclesService.getUserMotorcycles(ownerId);
             setMotorcycles(result);
         })();
-    },[]);
+    }, []);
 
     return motorcycles;
 }
