@@ -57,6 +57,7 @@ export default function MotorcycleDetails() {
     const editButtonHandler = (motorcycleId) => navigate(`/motorcycles/${motorcycleId}/edit`);
 
     const deleteMotorcycleHandler = async () => {
+        
         await motorcyclesService.deleteMotorcycle(motorcycleId);
         setShowDeleteConfirmModal(false)
         navigate('/');

@@ -1,6 +1,7 @@
 import { Route, Routes } from "react-router-dom"
 
 import { UserProvider } from "./context/AuthContext"
+
 import Header from "./components/header/Header"
 
 import Home from "./components/home/Home"
@@ -14,6 +15,8 @@ import MotorcycleDetails from "./components/motorcycle-details/MotorcycleDetails
 import EditMotorcycle from "./components/edit-motorcycle/EditMotorcycle"
 import Footer from "./components/footer/Footer"
 import UserCard from "./components/users/UserCard"
+import AuthGuard from "./components/guards/AuthGuard"
+import GuestGuard from "./components/guards/GuestGuard"
 
 function App() {
 
@@ -27,14 +30,18 @@ function App() {
                     <Routes>
                         <Route path="/" element={<Home />} />
                         <Route path="/motorcycles" element={<Motorcycles />} />
-                        <Route path="/post-motorcycle" element={<AddMotorcycle />} />
-                        <Route path="/motorcycles/:motorcycleId/edit" element={<EditMotorcycle />} />
-                        <Route path="/profile" element={<Profile />} />
-                        <Route path="/login" element={<Login />} />
-                        <Route path="/register" element={<Register />} />
-                        <Route path="/logout" element={<Logout />} />
                         <Route path="/motorcycles/:motorcycleId" element={<MotorcycleDetails />} />
-                        <Route path="/user/:userId" element={<UserCard />} />
+                        <Route element={<AuthGuard />}>
+                            <Route path="/post-motorcycle" element={<AddMotorcycle />} />
+                            <Route path="/profile" element={<Profile />} />
+                            <Route path="/motorcycles/:motorcycleId/edit" element={<EditMotorcycle />} />
+                            <Route path="/user/:userId" element={<UserCard />} />
+                            <Route path="/logout" element={<Logout />} />
+                        </Route>
+                        <Route element={<GuestGuard />}>
+                            <Route path="/register" element={<Register />} />
+                            <Route path="/login" element={<Login />} />
+                        </Route>
                     </Routes>
                 </main>
 
