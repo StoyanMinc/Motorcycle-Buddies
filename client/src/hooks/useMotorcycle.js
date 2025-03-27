@@ -62,7 +62,6 @@ export function useEditMotorcycle() {
     const editHandler = async (motorcycleId, values) => {
         await motorcyclesService.editMotorcycle(motorcycleId, values);
         navigate('/motorcycles');
-        console.log(values)
     };
     return editHandler;
 };

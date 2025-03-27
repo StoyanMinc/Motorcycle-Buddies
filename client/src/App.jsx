@@ -4,6 +4,9 @@ import { UserProvider } from "./context/AuthContext"
 
 import Header from "./components/header/Header"
 
+import AuthGuard from "./components/guards/AuthGuard"
+import GuestGuard from "./components/guards/GuestGuard"
+
 import Home from "./components/home/Home"
 import Motorcycles from "./components/motorcycles/Motorycles"
 import AddMotorcycle from "./components/addMotorcycle/AddMotorycle"
@@ -15,8 +18,6 @@ import MotorcycleDetails from "./components/motorcycle-details/MotorcycleDetails
 import EditMotorcycle from "./components/edit-motorcycle/EditMotorcycle"
 import Footer from "./components/footer/Footer"
 import UserCard from "./components/users/UserCard"
-import AuthGuard from "./components/guards/AuthGuard"
-import GuestGuard from "./components/guards/GuestGuard"
 
 function App() {
 

@@ -1,6 +1,6 @@
 import { del, get, post, put } from "./requester.js";
 
-const BASE_URL = 'https://motorcycle-buddies.live:3000/motorcycles';
+const BASE_URL = `${import.meta.env.VITE_APP_SERVER_URL}/motorcycles`;
 
 const create = (values) => post(BASE_URL, values);
 

@@ -1,5 +1,5 @@
 import { get, put } from "./requester";
-const BASE_URL = 'https://motorcycle-buddies.live:3000/auth';
+const BASE_URL = `${import.meta.env.VITE_APP_SERVER_URL}/auth`;
 
 export const getUserFromServer = (userId) => get(`${BASE_URL}/${userId}`);
 

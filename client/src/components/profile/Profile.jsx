@@ -31,7 +31,7 @@ export default function Profile() {
             ...updatedUser
         }))
     };
-    console.log(motorcycles);
+    
     return (
         <div className="page-container">
 
