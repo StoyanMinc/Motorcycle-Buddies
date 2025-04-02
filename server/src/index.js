@@ -1,14 +1,13 @@
 import express from 'express';
 import mongoose from 'mongoose';
 import cors from 'cors';
-
-import router from './router.js';
 import bodyParser from 'body-parser';
 import path from 'path';
 import https from 'https';
 import fs from 'fs';
 
-
+import router from './router.js';
+const configuration = process.argv[2];
 const app = express();
 
 try {
@@ -38,7 +37,13 @@ app.get("/uploadsImages/*", (req, res) => {
 app.get("/uploadsUserImages/*", (req, res) => {
     res.sendFile(path.join(import.meta.dirname, req.path));
 })
-https.createServer({
-    cert: fs.readFileSync("/etc/letsencrypt/live/motorcycle-buddies.live/cert.pem"),
-    key: fs.readFileSync("/etc/letsencrypt/live/motorcycle-buddies.live/privkey.pem")
-}, app).listen(3000, () => console.log('Server is listening on https://localhost:3000...'));
+if(configuration == "debug") {
+    app.listen(3000, () =>{
+        console.log("DEVELOPMENT Server is listening on http://localhost:3000...'");
+    })
+} else {
+    https.createServer({
+        cert: fs.readFileSync("/etc/letsencrypt/live/motorcycle-buddies.live/cert.pem"),
+        key: fs.readFileSync("/etc/letsencrypt/live/motorcycle-buddies.live/privkey.pem")
+    }, app).listen(3000, () => console.log('Server is listening on https://localhost:3000...'));
+}
